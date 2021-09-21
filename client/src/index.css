@@ -1,3 +1,54 @@
+/*
+===============
+Variables
+===============
+*/
+
+:root {
+  --clr-primary-1: hsl(42, 70%, 21%);
+  --clr-primary-2: hsl(42, 70%, 29%);
+  --clr-primary-3: hsl(42, 70%, 37%);
+  --clr-primary-4: hsl(42, 70%, 45%);
+  --clr-primary-5: hsl(42, 70%, 52%);
+  --clr-primary-6: hsl(42, 70%, 60%);
+  --clr-primary-7: hsl(42, 70%, 67%);
+  --clr-primary-8: hsl(42, 70%, 74%);
+  --clr-primary-9: hsl(42, 70%, 81%);
+  --clr-primary-10: hsl(42, 74%, 88%);
+
+  --clr-grey-1: hsl(251, 6%, 16%);
+  --clr-grey-2: hsl(251, 6%, 23%);
+  --clr-grey-3: hsl(251, 6%, 30%);
+  --clr-grey-4: hsl(251, 6%, 39%);
+  --clr-grey-5: hsl(251, 6%, 49%);
+  --clr-grey-6: hsl(251, 6%, 60%);
+  --clr-grey-7: hsl(251, 6%, 70%);
+  --clr-grey-8: hsl(251, 6%, 80%);
+  --clr-grey-9: hsl(251, 6%, 89%);
+  --clr-grey-10: hsl(251, 6%, 96%);
+
+  --clr-white: #fff;
+  --clr-black: #222;
+  --transition: all 0.3s linear;
+  --spacing: 0.1rem;
+  --radius: 0.25rem;
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --max-width: 1170px;
+}
+/*
+===============
+Global Styles
+===============
+*/
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +56,35 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--clr-primary-9);
+  color: var(--clr-grey-1);
+  line-height: 1.5;
+  font-size: 0.875rem;
+}
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/*
+===============
+global classes
+===============
+ */
+
+.section {
+  padding: 5rem 0;
+}
+.section-center {
+  width: 90vw;
+  margin: 0 auto;
+  max-width: var(--max-width);
+}
+
+@media screen and (min-width: 992px) {
+  .section-center {
+    width: 95vw;
+  }
 }
