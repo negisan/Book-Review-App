@@ -23,11 +23,6 @@ export const AuthProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [isLoading, setIsLoading] = useState(false)
 
-  const isLoggedin = () => {
-    // @ts-ignore
-    return JSON.parse(localStorage.getItem('user')) ? true : ''
-  }
-
   const login = async (credentials: { email: string; password: string }) => {
     setIsLoading(true)
     try {
@@ -54,7 +49,9 @@ export const AuthProvider = ({ children }: any) => {
   }
 
   useEffect(() => {
-    if (isLoggedin()) {
+    console.log('fetchrun')
+
+    if (localStorage.getItem('user')) {
       setIsLoading(true)
       AuthService.fetchUser().then(
         (user_info) => {
@@ -76,7 +73,6 @@ export const AuthProvider = ({ children }: any) => {
       value={{
         login,
         logout,
-        isLoggedin,
         isLoading,
         ...state,
       }}

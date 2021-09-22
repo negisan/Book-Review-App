@@ -1,2 +1,3 @@
 import Navbar from './Navbar'
-export { Navbar }
+import PrivateRoute from './PrivateRoute'
+export { Navbar, PrivateRoute }
