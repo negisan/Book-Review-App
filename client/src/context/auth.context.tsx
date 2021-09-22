@@ -26,7 +26,38 @@ export const AuthProvider = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState(false)
   const history = useHistory()
 
-  const login = async (credentials: { email: string; password: string }) => {
+  interface registerCredentials {
+    name: string
+    email: string
+    password: string
+  }
+
+  const register = async (credentials: registerCredentials) => {
+    setIsLoading(true)
+    try {
+      const user = await AuthService.register(credentials)
+      if (user.token) {
+        try {
+          const user_info = await AuthService.fetchUser()
+          dispatch({ type: FETCH_USER_SUCCESS, payload: user_info })
+          setIsLoading(false)
+        } catch (error) {
+          dispatch({ type: FETCH_USER_FAIL, payload: error })
+          setIsLoading(false)
+        }
+      }
+    } catch (error) {
+      dispatch({ type: REGISTER_FAIL, payload: error })
+      setIsLoading(false)
+    }
+  }
+
+  interface loginCredentials {
+    email: string
+    password: string
+  }
+
+  const login = async (credentials: loginCredentials) => {
     setIsLoading(true)
     try {
       const user = await AuthService.login(credentials)
@@ -76,6 +107,7 @@ export const AuthProvider = ({ children }: any) => {
     <AuthContext.Provider
       value={{
         login,
+        register,
         logout,
         isLoading,
         ...state,
