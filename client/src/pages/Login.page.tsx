@@ -1,7 +1,11 @@
 import React from 'react'
 import { Form, Field } from 'react-final-form'
 import styled from 'styled-components'
+
+import { useAuthContext } from '../context/auth.context'
+
 import { IoPersonCircleOutline } from 'react-icons/io5'
+import { useHistory } from 'react-router'
 
 interface FormData {
   email: string
@@ -9,8 +13,12 @@ interface FormData {
 }
 
 const Login: React.FC = () => {
+  const { login } = useAuthContext()
+  const history = useHistory()
+
   const onSubmit = async (values: FormData) => {
-    console.log(values)
+    await login(values)
+    history.replace('/')
   }
 
   return (
@@ -92,6 +100,8 @@ const FieldContainer = styled.div`
     background: var(--clr-primary-9);
     border-radius: 100px;
     color: var(--clr-grey-5);
+    font-size: 0.875rem;
+    letter-spacing: var(--spacing);
     :focus {
       outline: none;
     }

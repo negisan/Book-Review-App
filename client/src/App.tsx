@@ -12,13 +12,21 @@ import {
   User,
   UserEdit,
 } from './pages'
-
 import { Navbar } from './components'
 
+import { useAuthContext } from './context/auth.context'
+
 function App() {
+  const { isLoading, user } = useAuthContext()
+
+  if (isLoading) {
+    return <div style={{ textAlign: 'center' }}>LOADING...</div>
+  }
+
   return (
     <div>
       <Navbar />
+      {user?.name}
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/login' component={Login} />
