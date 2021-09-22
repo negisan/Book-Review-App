@@ -21,6 +21,18 @@ const Login: React.FC = () => {
     history.replace('/')
   }
 
+  const handleValidate = (values: FormData) => {
+    // @ts-ignore
+    const errors: FormData = {}
+    if (!values.email) {
+      errors.email = 'メールアドレスを入力してください'
+    }
+    if (!values.password) {
+      errors.password = 'パスワードを入力してください'
+    }
+    return errors
+  }
+
   return (
     <Wrapper>
       <FormCard>
@@ -32,6 +44,7 @@ const Login: React.FC = () => {
 
         <Form
           onSubmit={onSubmit}
+          validate={(values) => handleValidate(values)}
           render={({ handleSubmit, submitting }) => (
             <FormWrapper onSubmit={handleSubmit}>
               <IoPersonCircleOutline size={80} />
@@ -39,24 +52,30 @@ const Login: React.FC = () => {
                 <Field<string> name='email'>
                   {({ input, meta }) => (
                     <FieldContainer>
-                      <input {...input} type='text' placeholder='Email' />
-                      <div>
-                        {meta.error && meta.touched && (
-                          <span>{meta.error}</span>
-                        )}
-                      </div>
+                      <input
+                        {...input}
+                        type='text'
+                        placeholder='Email'
+                        className={`${meta.error && meta.touched && 'error'}`}
+                      />
+                      {meta.error && meta.touched && (
+                        <ErrorInfo>{meta.error}</ErrorInfo>
+                      )}
                     </FieldContainer>
                   )}
                 </Field>
                 <Field<string> name='password'>
                   {({ input, meta }) => (
                     <FieldContainer>
-                      <input {...input} type='text' placeholder='Password' />
-                      <div>
-                        {meta.error && meta.touched && (
-                          <span>{meta.error}</span>
-                        )}
-                      </div>
+                      <input
+                        {...input}
+                        type='text'
+                        placeholder='Password'
+                        className={`${meta.error && meta.touched && 'error'}`}
+                      />
+                      {meta.error && meta.touched && (
+                        <ErrorInfo>{meta.error}</ErrorInfo>
+                      )}
                     </FieldContainer>
                   )}
                 </Field>
@@ -71,6 +90,11 @@ const Login: React.FC = () => {
     </Wrapper>
   )
 }
+
+const ErrorInfo = styled.span`
+  margin-left: 1rem;
+  color: var(--clr-red);
+`
 
 const StyledButton = styled.button`
   width: 100%;
@@ -93,6 +117,9 @@ const StyledButton = styled.button`
 `
 const FieldContainer = styled.div`
   margin-bottom: 1.25rem;
+  .error {
+    border-color: var(--clr-red);
+  }
   input {
     width: 100%;
     padding: 0.75rem 1.5rem;
