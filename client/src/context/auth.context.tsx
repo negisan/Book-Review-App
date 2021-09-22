@@ -1,4 +1,6 @@
 import React, { useContext, useState, useReducer, useEffect } from 'react'
+import { useHistory } from 'react-router'
+
 import AuthService from '../services/auth.service'
 import reducer from '../reducers/auth.reducer'
 import {
@@ -22,6 +24,7 @@ export const AuthProvider = ({ children }: any) => {
   // @ts-ignore
   const [state, dispatch] = useReducer(reducer, initialState)
   const [isLoading, setIsLoading] = useState(false)
+  const history = useHistory()
 
   const login = async (credentials: { email: string; password: string }) => {
     setIsLoading(true)
@@ -46,6 +49,7 @@ export const AuthProvider = ({ children }: any) => {
   const logout = () => {
     localStorage.removeItem('user')
     dispatch({ type: LOGOUT })
+    history.push('/login')
   }
 
   useEffect(() => {

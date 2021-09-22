@@ -37,6 +37,7 @@ const Links = styled.div`
     border: transparent;
     background: transparent;
     color: var(--clr-grey-3);
+    cursor: pointer;
   }
 `
 
