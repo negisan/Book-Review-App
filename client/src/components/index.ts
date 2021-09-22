@@ -1,3 +1,4 @@
 import Navbar from './Navbar'
 import PrivateRoute from './PrivateRoute'
-export { Navbar, PrivateRoute }
+import CustomLoader from './CustomLoader'
+export { Navbar, PrivateRoute, CustomLoader }

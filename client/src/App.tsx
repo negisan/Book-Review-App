@@ -13,7 +13,7 @@ import {
   User,
   UserEdit,
 } from './pages'
-import { Navbar, PrivateRoute } from './components'
+import { Navbar, PrivateRoute, CustomLoader } from './components'
 
 import { useAuthContext } from './context/auth.context'
 
@@ -21,7 +21,7 @@ function App() {
   const { isLoading, user } = useAuthContext()
 
   if (isLoading) {
-    return <div style={{ textAlign: 'center' }}>LOADING...</div>
+    return <CustomLoader />
   }
 
   return (
