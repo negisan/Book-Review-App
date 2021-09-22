@@ -129,6 +129,9 @@ const FieldContainer = styled.div`
     color: var(--clr-grey-5);
     font-size: 0.875rem;
     letter-spacing: var(--spacing);
+    :-webkit-autofill {
+      box-shadow: 0 0 0 1000px white inset;
+    }
     :focus {
       outline: none;
     }
