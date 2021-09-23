@@ -5,12 +5,15 @@ import './index.css'
 import App from './App'
 import { AuthProvider } from './context/auth.context'
 import { UIProvider } from './context/UI.context'
+import { ReviewsProvider } from './context/reviews.context'
 
 ReactDOM.render(
   <Router>
     <UIProvider>
       <AuthProvider>
-        <App />
+        <ReviewsProvider>
+          <App />
+        </ReviewsProvider>
       </AuthProvider>
     </UIProvider>
   </Router>,
