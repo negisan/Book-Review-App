@@ -13,12 +13,14 @@ import {
   User,
   UserEdit,
 } from './pages'
-import { Navbar, PrivateRoute, CustomLoader } from './components'
+import { Sidebar, Navbar, PrivateRoute, CustomLoader } from './components'
 
 import { useAuthContext } from './context/auth.context'
+import { useUIContext } from './context/UI.context'
 
 function App() {
   const { isLoading, user } = useAuthContext()
+  const { isSidebarOpen } = useUIContext()
 
   if (isLoading) {
     return <CustomLoader />
@@ -26,6 +28,7 @@ function App() {
 
   return (
     <div>
+      {isSidebarOpen && <Sidebar />}
       <Navbar />
       <Switch>
         <Route exact path='/' component={Home} />
