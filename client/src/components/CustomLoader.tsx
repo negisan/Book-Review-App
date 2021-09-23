@@ -5,12 +5,12 @@ const CustomLoader = () => {
   return (
     <div
       style={{
-        position: 'fixed',
-        top: '30%',
-        left: '50%',
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: '10rem',
       }}
     >
-      <PuffLoader loading={true} color={'var(--clr-primary-5)'} size={100} />
+      <PuffLoader loading={true} color={'var(--clr-primary-5)'} size={250} />
     </div>
   )
 }
