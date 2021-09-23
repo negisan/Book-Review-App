@@ -41,7 +41,6 @@ function App() {
         <PrivateRoute exact path='/review/:id' component={Review} />
         <PrivateRoute exact path='/review/:id/edit' component={EditReview} />
       </Switch>
-      {user?.name}
     </div>
   )
 }
