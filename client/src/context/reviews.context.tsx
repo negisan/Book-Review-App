@@ -4,6 +4,7 @@ import reducer from '../reducers/reviews.reducer'
 import {
   FETCH_REVIEWS_SUCCESS,
   FETCH_REVIEWS_FAIL,
+  FETCH_MYREVIEWS_SUCCESS,
 } from '../constants/reviews.constants'
 import ReviewsService from '../services/reviews.service'
 
@@ -27,7 +28,6 @@ export const ReviewsProvider = ({ children }: any) => {
     setIsLoading(true)
     try {
       const reviews = await ReviewsService.fetchReviews()
-      console.log(reviews)
       dispatch({ type: FETCH_REVIEWS_SUCCESS, payload: reviews })
       setIsLoading(false)
     } catch (error) {
@@ -36,8 +36,23 @@ export const ReviewsProvider = ({ children }: any) => {
     }
   }
 
+  const fetchMyReviews = async () => {
+    setIsLoading(true)
+    try {
+      const reviews = await ReviewsService.fetchMyReviews()
+      console.log(reviews)
+      dispatch({ type: FETCH_MYREVIEWS_SUCCESS, payload: reviews })
+      setIsLoading(false)
+    } catch (error) {
+      dispatch({ type: FETCH_REVIEWS_FAIL, payload: error })
+      setIsLoading(false)
+    }
+  }
+
   return (
-    <ReviewsContext.Provider value={{ ...state, fetchReviews, isLoading }}>
+    <ReviewsContext.Provider
+      value={{ ...state, fetchReviews, fetchMyReviews, isLoading }}
+    >
       {children}
     </ReviewsContext.Provider>
   )

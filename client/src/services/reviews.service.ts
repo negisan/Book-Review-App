@@ -12,6 +12,18 @@ const fetchReviews = async () => {
   }
 }
 
+const fetchMyReviews = async () => {
+  try {
+    const res = await axios.get(`${BASE_API_URL}/books`, {
+      headers: authHeader(),
+    })
+    return res.data
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
   fetchReviews,
+  fetchMyReviews,
 }
