@@ -27,7 +27,6 @@ function App() {
   return (
     <div>
       <Navbar />
-      {user?.name}
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/login' component={Login} />
@@ -39,6 +38,7 @@ function App() {
         <PrivateRoute exact path='/review/:id' component={Review} />
         <PrivateRoute exact path='/review/:id/edit' component={EditReview} />
       </Switch>
+      {user?.name}
     </div>
   )
 }
