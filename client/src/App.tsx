@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import {
@@ -21,7 +21,7 @@ import { useUIContext } from './context/UI.context'
 
 function App() {
   const { isLoading } = useAuthContext()
-  const { isSidebarOpen, emitToast } = useUIContext()
+  const { isSidebarOpen } = useUIContext()
 
   if (isLoading) {
     return <CustomLoader />
@@ -31,9 +31,6 @@ function App() {
     <div>
       {isSidebarOpen && <Sidebar />}
       <Navbar />
-      {/* <button onClick={() => emitToast('success', 'let it go')}>
-        Notify !
-      </button> */}
       <ToastContainer
         position='top-right'
         autoClose={5000}

@@ -14,28 +14,31 @@ export const UIProvider = ({ children }: any) => {
     setIsSidebarOpen(false)
   }
 
-  type ToastType = 'success' | 'error'
+  const toastSuccess = (message: string) => {
+    toast.success(`${message}`, {
+      position: 'top-right',
+      autoClose: 5000,
+      closeOnClick: true,
+    })
+  }
 
-  const emitToast = (type: ToastType, message: string) => {
-    if (type === 'success' && message !== '') {
-      toast.success(`${message}`, {
-        position: 'top-right',
-        autoClose: 5000,
-        closeOnClick: true,
-      })
-    }
-    if (type === 'error' && message !== '') {
-      toast.error(`${message}`, {
-        position: 'top-right',
-        autoClose: 5000,
-        closeOnClick: true,
-      })
-    }
+  const toastError = (message: string) => {
+    toast.error(`${message}`, {
+      position: 'top-right',
+      autoClose: 5000,
+      closeOnClick: true,
+    })
   }
 
   return (
     <UIContext.Provider
-      value={{ isSidebarOpen, openSidebar, closeSidebar, emitToast }}
+      value={{
+        isSidebarOpen,
+        openSidebar,
+        closeSidebar,
+        toastSuccess,
+        toastError,
+      }}
     >
       {children}
     </UIContext.Provider>

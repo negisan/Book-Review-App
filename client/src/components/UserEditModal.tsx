@@ -9,7 +9,7 @@ import { useUIContext } from '../context/UI.context'
 
 const UserEditModal = ({ closeUserEditModal }: any) => {
   const { user, isLoading, updateUser } = useAuthContext()
-  const { emitToast } = useUIContext()
+  const { toastSuccess } = useUIContext()
   const history = useHistory()
 
   const disableScroll = (event: any) => {
@@ -31,7 +31,7 @@ const UserEditModal = ({ closeUserEditModal }: any) => {
   const onSubmit = async (values: any) => {
     await updateUser(values)
     history.push(`/user/${user.name}`)
-    emitToast('success', 'ユーザー情報を更新しました')
+    toastSuccess('ユーザー情報を更新しました')
   }
 
   const handleValidate = (values: any) => {

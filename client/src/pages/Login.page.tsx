@@ -14,13 +14,13 @@ interface FormData {
 
 const Login: React.FC = () => {
   const { login } = useAuthContext()
-  const { emitToast } = useUIContext()
+  const { toastSuccess } = useUIContext()
   const history = useHistory()
 
   const onSubmit = async (values: FormData) => {
     await login(values)
     history.replace('/')
-    emitToast('success', 'ログインしました')
+    toastSuccess('ログインしました')
   }
 
   const handleValidate = (values: FormData) => {
