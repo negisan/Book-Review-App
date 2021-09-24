@@ -2,11 +2,14 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Field, Form } from 'react-final-form'
 import { FaTimes } from 'react-icons/fa'
-import { useAuthContext } from '../context/auth.context'
 import { useHistory } from 'react-router'
+
+import { useAuthContext } from '../context/auth.context'
+import { useUIContext } from '../context/UI.context'
 
 const UserEditModal = ({ closeUserEditModal }: any) => {
   const { user, isLoading, updateUser } = useAuthContext()
+  const { emitToast } = useUIContext()
   const history = useHistory()
 
   const disableScroll = (event: any) => {
@@ -26,9 +29,9 @@ const UserEditModal = ({ closeUserEditModal }: any) => {
   }, [])
 
   const onSubmit = async (values: any) => {
-    window.alert(JSON.stringify(values))
     await updateUser(values)
     history.push(`/user/${user.name}`)
+    emitToast('success', 'ユーザー情報を更新しました')
   }
 
   const handleValidate = (values: any) => {
@@ -62,7 +65,7 @@ const UserEditModal = ({ closeUserEditModal }: any) => {
             onSubmit={onSubmit}
             validate={(values) => handleValidate(values)}
             initialValues={formData}
-            render={({ handleSubmit, submitting }) => (
+            render={({ handleSubmit, submitting, pristine }) => (
               <form onSubmit={handleSubmit}>
                 <div>
                   <Field<string> name='name'>
@@ -81,7 +84,7 @@ const UserEditModal = ({ closeUserEditModal }: any) => {
                     )}
                   </Field>
                   <ButtonContainer>
-                    <button type='submit' disabled={submitting}>
+                    <button type='submit' disabled={submitting || pristine}>
                       submit
                     </button>
                   </ButtonContainer>
@@ -118,6 +121,9 @@ const ButtonContainer = styled.div`
     transition: var(--transition);
     &:hover {
       background: var(--clr-primary-5);
+    }
+    &[disabled] {
+      cursor: not-allowed;
     }
   }
 `
