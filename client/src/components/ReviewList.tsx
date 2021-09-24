@@ -3,6 +3,15 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { IoPersonCircleOutline } from 'react-icons/io5'
 
+interface ReviewData {
+  id: string
+  title: string
+  detail: string
+  url: string
+  review: string
+  reviewer: string
+}
+
 const ReviewList = (props: any) => {
   const reviews = props.reviews
   return (
@@ -13,9 +22,10 @@ const ReviewList = (props: any) => {
         <span className='view-more'>ViewMore</span>
       </Heading>
       <ReviewListContainer>
-        {/* @ts-ignore */}
-        {reviews.map((review) => {
+        {reviews.map((review: ReviewData) => {
           const { id, title, reviewer } = review
+          const randamNum = Math.floor(Math.random() * 100)
+          const picsum = `https://picsum.photos/id/${randamNum}/200/260`
           return (
             <Link to={`/review/${id}`} key={id}>
               <ReviewContainer>
@@ -24,7 +34,7 @@ const ReviewList = (props: any) => {
                   <IoPersonCircleOutline size={20} />
                   {reviewer}
                 </span>
-                <img src='https://picsum.photos/200/260' alt='picsum' />
+                <img src={picsum} alt='picsum' />
               </ReviewContainer>
             </Link>
           )
