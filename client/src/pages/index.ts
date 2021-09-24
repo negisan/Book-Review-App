@@ -7,7 +7,6 @@ import Home from './Home.page'
 import Login from './Login.page'
 import Signup from './Signup.page'
 import User from './User.page'
-import UserEdit from './UserEdit.page'
 export {
   Review,
   Reviews,
@@ -18,5 +17,4 @@ export {
   Login,
   Signup,
   User,
-  UserEdit,
 }

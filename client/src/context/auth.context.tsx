@@ -9,6 +9,8 @@ import {
   LOGOUT,
   FETCH_USER_SUCCESS,
   FETCH_USER_FAIL,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAIL,
 } from '../constants/auth.constants'
 
 const initialState = {
@@ -83,9 +85,25 @@ export const AuthProvider = ({ children }: any) => {
     history.push('/login')
   }
 
-  useEffect(() => {
-    console.log('fetchrun')
+  interface UserCredentials {
+    name: string
+  }
 
+  const updateUser = async (credentials: UserCredentials) => {
+    setIsLoading(true)
+    try {
+      const user = await AuthService.updateUser(credentials)
+      console.log(user)
+
+      dispatch({ type: UPDATE_USER_SUCCESS, payload: user })
+      setIsLoading(false)
+    } catch (error) {
+      dispatch({ type: UPDATE_USER_FAIL, payload: error })
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
     if (localStorage.getItem('user')) {
       setIsLoading(true)
       AuthService.fetchUser().then(
@@ -109,6 +127,7 @@ export const AuthProvider = ({ children }: any) => {
         login,
         register,
         logout,
+        updateUser,
         isLoading,
         ...state,
       }}

@@ -11,7 +11,6 @@ import {
   Login,
   Signup,
   User,
-  UserEdit,
 } from './pages'
 import { Sidebar, Navbar, PrivateRoute, CustomLoader } from './components'
 
@@ -19,7 +18,7 @@ import { useAuthContext } from './context/auth.context'
 import { useUIContext } from './context/UI.context'
 
 function App() {
-  const { isLoading, user } = useAuthContext()
+  const { isLoading } = useAuthContext()
   const { isSidebarOpen } = useUIContext()
 
   if (isLoading) {
@@ -35,7 +34,6 @@ function App() {
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
         <PrivateRoute exact path='/user/:id' component={User} />
-        <PrivateRoute exact path='/user/:id/edit' component={UserEdit} />
         <PrivateRoute exact path='/user/:id/reviews' component={Reviews} />
         <PrivateRoute exact path='/reviews/new' component={CreateReview} />
         <PrivateRoute exact path='/review/:id' component={Review} />

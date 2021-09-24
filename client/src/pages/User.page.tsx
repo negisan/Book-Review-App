@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoPersonCircleOutline } from 'react-icons/io5'
 import { GoLinkExternal } from 'react-icons/go'
 import styled from 'styled-components'
-import { CustomLoader, ReviewList } from '../components'
-import { Link } from 'react-router-dom'
+
+import { CustomLoader, ReviewList, UserEditModal } from '../components'
 
 import { useAuthContext } from '../context/auth.context'
 import { useReviewsContext } from '../context/reviews.context'
@@ -11,6 +11,15 @@ import { useReviewsContext } from '../context/reviews.context'
 const User = () => {
   const { user } = useAuthContext()
   const { my_reviews, fetchMyReviews, isLoading } = useReviewsContext()
+  const [showUserEditModal, setShowUserEditModal] = useState(false)
+
+  const openUserEditModal = () => {
+    setShowUserEditModal(true)
+  }
+
+  const closeUserEditModal = () => {
+    setShowUserEditModal(false)
+  }
 
   useEffect(() => {
     fetchMyReviews()
@@ -24,12 +33,13 @@ const User = () => {
     <div className='section section-center'>
       <UserInfoWrapper>
         <IoPersonCircleOutline size={160} />
-        <Link to={`/user/${user.name}/edit`}>
-          <UserNameContainer>
-            <GoLinkExternal size={25} />
-            <p className='username'>{user.name}</p>
-          </UserNameContainer>
-        </Link>
+        <UserNameContainer onClick={openUserEditModal}>
+          <GoLinkExternal size={25} />
+          <p className='username'>{user.name}</p>
+        </UserNameContainer>
+        {showUserEditModal && (
+          <UserEditModal closeUserEditModal={closeUserEditModal} />
+        )}
         <div className='horizon'></div>
       </UserInfoWrapper>
       <ReviewList reviews={my_reviews} />
@@ -44,6 +54,7 @@ const UserNameContainer = styled.div`
   align-items: center;
   text-align: center;
   color: var(--clr-grey-3);
+  cursor: pointer;
   svg {
     align-self: end;
     margin-right: 1.25rem;

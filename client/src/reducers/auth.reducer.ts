@@ -4,6 +4,8 @@ import {
   FETCH_USER_SUCCESS,
   FETCH_USER_FAIL,
   LOGOUT,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAIL,
 } from '../constants/auth.constants'
 
 // @ts-ignore
@@ -21,6 +23,12 @@ const auth_reducer = (state, action) => {
     return { ...state, user: action.payload }
   }
   if (action.type === FETCH_USER_FAIL) {
+    return { ...state, user_error: action.payload }
+  }
+  if (action.type === UPDATE_USER_SUCCESS) {
+    return { ...state, user: action.payload }
+  }
+  if (action.type === UPDATE_USER_FAIL) {
     return { ...state, user_error: action.payload }
   }
   throw new Error(`No Matching "${action.type}" - action type`)

@@ -3,12 +3,12 @@ import authHeader from './auth-header'
 
 const BASE_API_URL = 'https://api-for-missions-and-railways.herokuapp.com/'
 
-interface loginCredentials {
+interface LoginCredentials {
   email: string
   password: string
 }
 
-const login = async (credentials: loginCredentials) => {
+const login = async (credentials: LoginCredentials) => {
   try {
     const res = await axios.post(
       BASE_API_URL + 'signin',
@@ -23,13 +23,13 @@ const login = async (credentials: loginCredentials) => {
   }
 }
 
-interface registerCredentials {
+interface RegisterCredentials {
   name: string
   email: string
   password: string
 }
 
-const register = async (credentials: registerCredentials) => {
+const register = async (credentials: RegisterCredentials) => {
   try {
     const res = await axios.post(
       BASE_API_URL + 'users',
@@ -57,8 +57,29 @@ const fetchUser = async () => {
   }
 }
 
+interface UserCredentials {
+  name: string
+}
+
+const updateUser = async (credentials: UserCredentials) => {
+  try {
+    const res = await axios({
+      method: 'put',
+      url: BASE_API_URL + 'users',
+      headers: authHeader(),
+      data: JSON.stringify(credentials),
+    })
+    if (res.data) {
+      return res.data
+    }
+  } catch (error) {
+    return error
+  }
+}
+
 export default {
   login,
   register,
   fetchUser,
+  updateUser,
 }

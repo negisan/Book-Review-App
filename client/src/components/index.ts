@@ -3,4 +3,12 @@ import PrivateRoute from './PrivateRoute'
 import CustomLoader from './CustomLoader'
 import Sidebar from './Sidebar'
 import ReviewList from './ReviewList'
-export { ReviewList, Sidebar, Navbar, PrivateRoute, CustomLoader }
+import UserEditModal from './UserEditModal'
+export {
+  UserEditModal,
+  ReviewList,
+  Sidebar,
+  Navbar,
+  PrivateRoute,
+  CustomLoader,
+}
