@@ -3,6 +3,7 @@ import { Form, Field } from 'react-final-form'
 import styled from 'styled-components'
 import { IoPersonCircleOutline } from 'react-icons/io5'
 import { useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import { useAuthContext } from '../context/auth.context'
 import { useUIContext } from '../context/UI.context'
@@ -85,6 +86,9 @@ const Login: React.FC = () => {
                   login
                 </StyledButton>
               </FormContainer>
+              <LinksContainer>
+                <Link to='/signup'>登録がまだですか？</Link>
+              </LinksContainer>
             </FormWrapper>
           )}
         />
@@ -92,6 +96,13 @@ const Login: React.FC = () => {
     </Wrapper>
   )
 }
+
+const LinksContainer = styled.div`
+  a {
+    color: var(--clr-grey-5);
+    font-size: 0.85rem;
+  }
+`
 
 const ErrorInfo = styled.span`
   margin-left: 1rem;
@@ -150,7 +161,7 @@ const FormContainer = styled.div`
 `
 
 const FormWrapper = styled.form`
-  padding: 6rem 0;
+  padding: 3rem 0;
   display: flex;
   flex-flow: column wrap;
   align-items: center;
