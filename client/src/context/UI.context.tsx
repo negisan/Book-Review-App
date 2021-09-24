@@ -17,7 +17,7 @@ export const UIProvider = ({ children }: any) => {
   const toastSuccess = (message: string) => {
     toast.success(`${message}`, {
       position: 'top-right',
-      autoClose: 5000,
+      autoClose: 3000,
       closeOnClick: true,
     })
   }
