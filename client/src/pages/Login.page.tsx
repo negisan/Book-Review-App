@@ -2,7 +2,6 @@ import React from 'react'
 import { Form, Field } from 'react-final-form'
 import styled from 'styled-components'
 import { IoPersonCircleOutline } from 'react-icons/io5'
-import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 
 import { useAuthContext } from '../context/auth.context'
@@ -15,13 +14,9 @@ interface FormData {
 
 const Login: React.FC = () => {
   const { login } = useAuthContext()
-  const { toastSuccess } = useUIContext()
-  const history = useHistory()
 
   const onSubmit = async (values: FormData) => {
     await login(values)
-    history.replace('/')
-    toastSuccess('ログインしました')
   }
 
   const handleValidate = (values: FormData) => {

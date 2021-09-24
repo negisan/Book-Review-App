@@ -2,11 +2,9 @@ import React from 'react'
 import { Form, Field } from 'react-final-form'
 import styled from 'styled-components'
 import { IoPersonCircleOutline } from 'react-icons/io5'
-import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 
 import { useAuthContext } from '../context/auth.context'
-import { useUIContext } from '../context/UI.context'
 
 interface FormData {
   name: string
@@ -17,8 +15,6 @@ interface FormData {
 
 const Signup: React.FC = () => {
   const { register } = useAuthContext()
-  const { toastSuccess } = useUIContext()
-  const history = useHistory()
 
   const onSubmit = async (values: FormData) => {
     await register({
@@ -26,8 +22,6 @@ const Signup: React.FC = () => {
       email: values.email,
       password: values.password,
     })
-    history.replace('/')
-    toastSuccess('ユーザー登録に成功しました')
   }
 
   const handleValidate = (values: FormData) => {

@@ -12,11 +12,9 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAIL,
 } from '../constants/auth.constants'
+import { useUIContext } from './UI.context'
 
 const initialState = {
-  register_error: '',
-  login_error: '',
-  user_error: '',
   user: '',
 }
 
@@ -26,6 +24,7 @@ export const AuthProvider = ({ children }: any) => {
   // @ts-ignore
   const [state, dispatch] = useReducer(reducer, initialState)
   const [isLoading, setIsLoading] = useState(false)
+  const { toastSuccess, toastError } = useUIContext()
   const history = useHistory()
 
   interface registerCredentials {
@@ -36,22 +35,32 @@ export const AuthProvider = ({ children }: any) => {
 
   const register = async (credentials: registerCredentials) => {
     setIsLoading(true)
-    try {
-      const user = await AuthService.register(credentials)
-      if (user.token) {
-        try {
-          const user_info = await AuthService.fetchUser()
-          dispatch({ type: FETCH_USER_SUCCESS, payload: user_info })
-          setIsLoading(false)
-        } catch (error) {
-          dispatch({ type: FETCH_USER_FAIL, payload: error })
-          setIsLoading(false)
-        }
-      }
-    } catch (error) {
-      dispatch({ type: REGISTER_FAIL, payload: error })
-      setIsLoading(false)
-    }
+    await AuthService.register(credentials)
+      .then(() => {
+        AuthService.fetchUser()
+          .then((user_info) => {
+            dispatch({ type: FETCH_USER_SUCCESS, payload: user_info })
+            toastSuccess('ようこそ ' + user_info.name + ' さん')
+            history.replace('/')
+            setIsLoading(false)
+          })
+          .catch((error) => {
+            const message =
+              error.response?.data?.ErrorMessageJP ||
+              error.message ||
+              error.toString()
+            toastError(message)
+            setIsLoading(false)
+          })
+      })
+      .catch((error) => {
+        const message =
+          error.response?.data?.ErrorMessageJP ||
+          error.message ||
+          error.toString()
+        toastError(message)
+        setIsLoading(false)
+      })
   }
 
   interface loginCredentials {
@@ -61,22 +70,34 @@ export const AuthProvider = ({ children }: any) => {
 
   const login = async (credentials: loginCredentials) => {
     setIsLoading(true)
-    try {
-      const user = await AuthService.login(credentials)
-      if (user.token) {
-        try {
-          const user_info = await AuthService.fetchUser()
-          dispatch({ type: FETCH_USER_SUCCESS, payload: user_info })
-          setIsLoading(false)
-        } catch (error) {
-          dispatch({ type: FETCH_USER_FAIL, payload: error })
-          setIsLoading(false)
-        }
-      }
-    } catch (error) {
-      dispatch({ type: LOGIN_FAIL, payload: error })
-      setIsLoading(false)
-    }
+    await AuthService.login(credentials)
+      .then(() => {
+        AuthService.fetchUser()
+          .then((user_info) => {
+            dispatch({ type: FETCH_USER_SUCCESS, payload: user_info })
+            toastSuccess('ログインしました')
+            history.replace('/')
+            setIsLoading(false)
+          })
+          .catch((error) => {
+            console.log('ログインユーザーフェッチのキャッチ句', error)
+            const message =
+              error.response?.data?.ErrorMessageJP ||
+              error.message ||
+              error.toString()
+            toastError(message)
+            setIsLoading(false)
+          })
+      })
+      .catch((error) => {
+        console.log('ログインキャッチ句', error)
+        const message =
+          error.response?.data?.ErrorMessageJP ||
+          error.message ||
+          error.toString()
+        toastError(message)
+        setIsLoading(false)
+      })
   }
 
   const logout = () => {
@@ -91,16 +112,21 @@ export const AuthProvider = ({ children }: any) => {
 
   const updateUser = async (credentials: UserCredentials) => {
     setIsLoading(true)
-    try {
-      const user = await AuthService.updateUser(credentials)
-      console.log(user)
-
-      dispatch({ type: UPDATE_USER_SUCCESS, payload: user })
-      setIsLoading(false)
-    } catch (error) {
-      dispatch({ type: UPDATE_USER_FAIL, payload: error })
-      setIsLoading(false)
-    }
+    await AuthService.updateUser(credentials)
+      .then((user) => {
+        dispatch({ type: UPDATE_USER_SUCCESS, payload: user })
+        toastSuccess('ユーザー情報を更新しました')
+        history.push(`/user/${user.name}`)
+        setIsLoading(false)
+      })
+      .catch((error) => {
+        const message =
+          error.response?.data?.ErrorMessageJP ||
+          error.message ||
+          error.toString()
+        toastError(message)
+        setIsLoading(false)
+      })
   }
 
   useEffect(() => {
@@ -113,7 +139,11 @@ export const AuthProvider = ({ children }: any) => {
           return Promise.resolve()
         },
         (error) => {
-          dispatch({ type: FETCH_USER_FAIL, payload: error })
+          const message =
+            error.response?.data?.ErrorMessageJP ||
+            error.message ||
+            error.toString()
+          toastError(message)
           setIsLoading(false)
           return Promise.reject()
         }

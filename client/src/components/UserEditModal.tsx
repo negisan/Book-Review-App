@@ -2,15 +2,11 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Field, Form } from 'react-final-form'
 import { FaTimes } from 'react-icons/fa'
-import { useHistory } from 'react-router'
 
 import { useAuthContext } from '../context/auth.context'
-import { useUIContext } from '../context/UI.context'
 
 const UserEditModal = ({ closeUserEditModal }: any) => {
-  const { user, isLoading, updateUser } = useAuthContext()
-  const { toastSuccess } = useUIContext()
-  const history = useHistory()
+  const { user, updateUser } = useAuthContext()
 
   const disableScroll = (event: any) => {
     event.preventDefault()
@@ -30,8 +26,6 @@ const UserEditModal = ({ closeUserEditModal }: any) => {
 
   const onSubmit = async (values: any) => {
     await updateUser(values)
-    history.push(`/user/${user.name}`)
-    toastSuccess('ユーザー情報を更新しました')
   }
 
   const handleValidate = (values: any) => {

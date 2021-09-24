@@ -29,8 +29,6 @@ function App() {
 
   return (
     <div>
-      {isSidebarOpen && <Sidebar />}
-      <Navbar />
       <ToastContainer
         position='top-right'
         autoClose={5000}
@@ -40,6 +38,8 @@ function App() {
         rtl={false}
         theme='dark'
       />
+      {isSidebarOpen && <Sidebar />}
+      <Navbar />
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/login' component={Login} />

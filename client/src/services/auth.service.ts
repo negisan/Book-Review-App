@@ -9,18 +9,17 @@ interface LoginCredentials {
 }
 
 const login = async (credentials: LoginCredentials) => {
-  try {
-    const res = await axios.post(
-      BASE_API_URL + 'signin',
-      JSON.stringify(credentials)
-    )
-    if (res.data.token) {
+  return await axios
+    .post(BASE_API_URL + 'signin', JSON.stringify(credentials))
+    .then((res) => {
+      console.log('サービスのThen句', res)
       localStorage.setItem('user', JSON.stringify(res.data))
-      return res.data
-    }
-  } catch (error) {
-    return error
-  }
+      return Promise.resolve()
+    })
+    .catch((err) => {
+      console.log('サービスのcatch句', err)
+      return Promise.reject(err)
+    })
 }
 
 interface RegisterCredentials {
@@ -30,18 +29,15 @@ interface RegisterCredentials {
 }
 
 const register = async (credentials: RegisterCredentials) => {
-  try {
-    const res = await axios.post(
-      BASE_API_URL + 'users',
-      JSON.stringify(credentials)
-    )
-    if (res.data.token) {
+  return await axios
+    .post(BASE_API_URL + 'users', JSON.stringify(credentials))
+    .then((res) => {
       localStorage.setItem('user', JSON.stringify(res.data))
       return res.data
-    }
-  } catch (error) {
-    return error
-  }
+    })
+    .catch((err) => {
+      return Promise.reject(err)
+    })
 }
 
 const fetchUser = async () => {
@@ -62,19 +58,18 @@ interface UserCredentials {
 }
 
 const updateUser = async (credentials: UserCredentials) => {
-  try {
-    const res = await axios({
-      method: 'put',
-      url: BASE_API_URL + 'users',
-      headers: authHeader(),
-      data: JSON.stringify(credentials),
+  return await axios({
+    method: 'put',
+    url: BASE_API_URL + 'users',
+    headers: authHeader(),
+    data: JSON.stringify(credentials),
+  })
+    .then((res) => {
+      return Promise.resolve(res.data)
     })
-    if (res.data) {
-      return res.data
-    }
-  } catch (error) {
-    return error
-  }
+    .catch((err) => {
+      return Promise.reject(err)
+    })
 }
 
 export default {
