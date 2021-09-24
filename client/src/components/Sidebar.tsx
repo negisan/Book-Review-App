@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { FaTimes } from 'react-icons/fa'
 import { GiBookAura } from 'react-icons/gi'
@@ -15,6 +15,23 @@ const Sidebar: React.FC = () => {
     logout()
     closeSidebar()
   }
+
+  const disableScroll = (event: any) => {
+    event.preventDefault()
+  }
+
+  useEffect(() => {
+    document.addEventListener('touchmove', disableScroll, {
+      passive: false,
+    })
+    document.addEventListener('mousewheel', disableScroll, {
+      passive: false,
+    })
+    return () => {
+      document.removeEventListener('touchmove', disableScroll)
+      document.removeEventListener('mousewheel', disableScroll)
+    }
+  }, [])
 
   return (
     <Wrapper>
