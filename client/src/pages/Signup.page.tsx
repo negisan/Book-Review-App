@@ -6,6 +6,7 @@ import { useAuthContext } from '../context/auth.context'
 
 import { IoPersonCircleOutline } from 'react-icons/io5'
 import { useHistory } from 'react-router'
+import { useUIContext } from '../context/UI.context'
 
 interface FormData {
   name: string
@@ -16,6 +17,7 @@ interface FormData {
 
 const Signup: React.FC = () => {
   const { register } = useAuthContext()
+  const { emitToast } = useUIContext()
   const history = useHistory()
 
   const onSubmit = async (values: FormData) => {
@@ -25,6 +27,7 @@ const Signup: React.FC = () => {
       password: values.password,
     })
     history.replace('/')
+    emitToast('success', 'ユーザー登録に成功しました')
   }
 
   const handleValidate = (values: FormData) => {

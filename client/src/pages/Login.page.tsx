@@ -1,11 +1,11 @@
 import React from 'react'
 import { Form, Field } from 'react-final-form'
 import styled from 'styled-components'
-
-import { useAuthContext } from '../context/auth.context'
-
 import { IoPersonCircleOutline } from 'react-icons/io5'
 import { useHistory } from 'react-router'
+
+import { useAuthContext } from '../context/auth.context'
+import { useUIContext } from '../context/UI.context'
 
 interface FormData {
   email: string
@@ -14,11 +14,13 @@ interface FormData {
 
 const Login: React.FC = () => {
   const { login } = useAuthContext()
+  const { emitToast } = useUIContext()
   const history = useHistory()
 
   const onSubmit = async (values: FormData) => {
     await login(values)
     history.replace('/')
+    emitToast('success', 'ログインしました')
   }
 
   const handleValidate = (values: FormData) => {

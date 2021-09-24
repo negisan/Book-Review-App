@@ -8,12 +8,13 @@ import { useUIContext } from '../context/UI.context'
 import { useAuthContext } from '../context/auth.context'
 
 const Sidebar: React.FC = () => {
-  const { isSidebarOpen, closeSidebar } = useUIContext()
+  const { isSidebarOpen, closeSidebar, emitToast } = useUIContext()
   const { logout, user } = useAuthContext()
 
   const logoutWithSidebarClose = () => {
     logout()
     closeSidebar()
+    emitToast('success', 'ログアウトしました')
   }
 
   const disableScroll = (event: any) => {
