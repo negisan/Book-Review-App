@@ -13,6 +13,7 @@ import {
   Login,
   Signup,
   User,
+  ErrorPage,
 } from './pages'
 import {
   Sidebar,
@@ -55,6 +56,7 @@ function App() {
         <PrivateRoute exact path='/reviews/new' component={CreateReview} />
         <PrivateRoute exact path='/review/:id' component={Review} />
         <PrivateRoute exact path='/review/:id/edit' component={EditReview} />
+        <Route path='*' component={ErrorPage} />
       </Switch>
       <Footer />
     </div>
