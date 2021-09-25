@@ -14,7 +14,13 @@ import {
   Signup,
   User,
 } from './pages'
-import { Sidebar, Navbar, PrivateRoute, CustomLoader } from './components'
+import {
+  Sidebar,
+  Navbar,
+  PrivateRoute,
+  CustomLoader,
+  Footer,
+} from './components'
 
 import { useAuthContext } from './context/auth.context'
 import { useUIContext } from './context/UI.context'
@@ -50,6 +56,7 @@ function App() {
         <PrivateRoute exact path='/review/:id' component={Review} />
         <PrivateRoute exact path='/review/:id/edit' component={EditReview} />
       </Switch>
+      <Footer />
     </div>
   )
 }
