@@ -14,7 +14,7 @@ const Review = () => {
   // @ts-ignore
   const { id } = useParams()
   const { title, url, detail, review, reviewer, isMine } = items
-  const [isEditMenueOpen, setIsEditMenueOpen] = useState(true)
+  const [isEditMenueOpen, setIsEditMenueOpen] = useState(false)
 
   console.log(isEditMenueOpen)
 
