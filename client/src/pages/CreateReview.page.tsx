@@ -1,10 +1,11 @@
 import React from 'react'
+import { ReviewForm } from '../components'
 
-const CreateReview = () => {
+const CreateReview: React.FC = () => {
   return (
-    <div>
-      <h1>CreateReviewPage</h1>
-    </div>
+    <>
+      <ReviewForm />
+    </>
   )
 }
 

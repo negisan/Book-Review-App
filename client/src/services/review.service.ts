@@ -42,7 +42,32 @@ const fetchReview = async (id: string) => {
     })
 }
 
+interface ReviewData {
+  title: string
+  url: string
+  detail: string
+  review: string
+}
+
+const createReview = async (values: ReviewData) => {
+  return await axios({
+    method: 'post',
+    url: BASE_API_URL + 'books',
+    headers: authHeader(),
+    data: JSON.stringify(values),
+  })
+    .then((res) => {
+      console.log(res)
+
+      return Promise.resolve()
+    })
+    .catch((err) => {
+      return Promise.reject(err)
+    })
+}
+
 export default {
+  createReview,
   fetchReviews,
   fetchMyReviews,
   fetchReview,

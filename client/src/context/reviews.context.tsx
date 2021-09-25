@@ -1,4 +1,5 @@
 import React, { useContext, useReducer, useState } from 'react'
+import { useHistory } from 'react-router'
 
 import reducer from '../reducers/reviews.reducer'
 import {
@@ -21,7 +22,8 @@ export const ReviewsProvider = ({ children }: any) => {
   // @ts-ignore
   const [state, dispatch] = useReducer(reducer, initialState)
   const [isLoading, setIsLoading] = useState(false)
-  const { toastError } = useUIContext()
+  const { toastError, toastSuccess } = useUIContext()
+  const history = useHistory()
 
   const fetchReviews = async () => {
     setIsLoading(true)
@@ -72,9 +74,39 @@ export const ReviewsProvider = ({ children }: any) => {
       })
   }
 
+  interface ReviewData {
+    title: string
+    url: string
+    detail: string
+    review: string
+  }
+
+  const createReview = async (values: ReviewData) => {
+    setIsLoading(true)
+    await ReviewService.createReview(values)
+      .then(() => {
+        toastSuccess('レビューを投稿しました')
+        history.push('/')
+        setIsLoading(false)
+      })
+      .catch((err) => {
+        const message =
+          err.response?.data?.ErrorMessageJP || err.message || err.toString()
+        toastError(message)
+        setIsLoading(false)
+      })
+  }
+
   return (
     <ReviewsContext.Provider
-      value={{ ...state, fetchReviews, fetchMyReviews, fetchReview, isLoading }}
+      value={{
+        ...state,
+        fetchReviews,
+        fetchMyReviews,
+        fetchReview,
+        createReview,
+        isLoading,
+      }}
     >
       {children}
     </ReviewsContext.Provider>

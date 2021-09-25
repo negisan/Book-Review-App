@@ -5,7 +5,9 @@ import Sidebar from './Sidebar'
 import ReviewList from './ReviewList'
 import UserEditModal from './UserEditModal'
 import Footer from './Footer'
+import ReviewForm from './ReviewForm'
 export {
+  ReviewForm,
   Footer,
   UserEditModal,
   ReviewList,
