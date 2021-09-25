@@ -16,7 +16,7 @@ const Review = () => {
   const { title, url, detail, review, reviewer, isMine } = items
   const [isEditMenueOpen, setIsEditMenueOpen] = useState(false)
 
-  console.log(isEditMenueOpen)
+  console.log(items)
 
   const closeEditMenue = () => {
     setIsEditMenueOpen(false)

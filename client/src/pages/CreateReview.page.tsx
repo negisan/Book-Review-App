@@ -4,7 +4,7 @@ import { ReviewForm } from '../components'
 const CreateReview: React.FC = () => {
   return (
     <>
-      <ReviewForm />
+      <ReviewForm from={'create_page'} />
     </>
   )
 }

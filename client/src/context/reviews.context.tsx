@@ -6,6 +6,7 @@ import {
   FETCH_REVIEWS_SUCCESS,
   FETCH_MYREVIEWS_SUCCESS,
   FETCH_REVIEW_SUCCESS,
+  UPDATE_REVIEW_SUCCESS,
 } from '../constants/reviews.constants'
 import ReviewService from '../services/review.service'
 import { useUIContext } from './UI.context'
@@ -97,6 +98,24 @@ export const ReviewsProvider = ({ children }: any) => {
       })
   }
 
+  const updateTeview = async (id: string, values: ReviewData) => {
+    setIsLoading(true)
+    await ReviewService.updateReview(id, values)
+      .then((review) => {
+        const bookId = review.id
+        dispatch({ type: UPDATE_REVIEW_SUCCESS, payload: review })
+        toastSuccess('投稿を更新しました')
+        history.push('/review/' + bookId)
+        setIsLoading(false)
+      })
+      .catch((err) => {
+        const message =
+          err.response?.data?.ErrorMessageJP || err.message || err.toString()
+        toastError(message)
+        setIsLoading(false)
+      })
+  }
+
   return (
     <ReviewsContext.Provider
       value={{
@@ -105,6 +124,7 @@ export const ReviewsProvider = ({ children }: any) => {
         fetchMyReviews,
         fetchReview,
         createReview,
+        updateTeview,
         isLoading,
       }}
     >

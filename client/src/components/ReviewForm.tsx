@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Form, Field } from 'react-final-form'
+import { useParams } from 'react-router'
 import styled from 'styled-components'
+
+import { CustomLoader } from '.'
 
 import { useReviewsContext } from '../context/reviews.context'
 
@@ -11,12 +14,20 @@ interface FormData {
   review: string
 }
 
-const ReviewForm = () => {
-  const { createReview } = useReviewsContext()
+const ReviewForm = (props?: any) => {
+  const from = props.from
+  const { fetchReview, createReview, updateTeview, review, isLoading } =
+    useReviewsContext()
+  // @ts-ignore
+  const { id } = useParams()
 
   const onSubmit = async (values: FormData) => {
-    console.log(values)
-    await createReview(values)
+    if (from === 'edit_page') {
+      await updateTeview(id, values)
+    }
+    if (from === 'create_page') {
+      await createReview(values)
+    }
   }
 
   const handleValidate = (values: FormData) => {
@@ -37,11 +48,31 @@ const ReviewForm = () => {
     return errors
   }
 
+  // EditPageにURL指定で直接アクセスしてきたとき、又はリロードしたときのために必要
+  useEffect(() => {
+    if (from === 'edit_page' && review === '') {
+      fetchReview(id)
+    }
+  }, [])
+
   let formData: FormData = {
     title: '',
     url: '',
     detail: '',
     review: '',
+  }
+
+  if (from === 'edit_page') {
+    formData = {
+      title: review.title,
+      url: review.url,
+      detail: review.detail,
+      review: review.review,
+    }
+  }
+
+  if (isLoading) {
+    return <CustomLoader />
   }
 
   return (

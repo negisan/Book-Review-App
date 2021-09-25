@@ -66,7 +66,23 @@ const createReview = async (values: ReviewData) => {
     })
 }
 
+const updateReview = async (id: string, values: ReviewData) => {
+  return await axios({
+    method: 'put',
+    url: BASE_API_URL + 'books/' + id,
+    headers: authHeader(),
+    data: JSON.stringify(Object.assign({}, { id: id }, values)),
+  })
+    .then((res) => {
+      return Promise.resolve(res.data)
+    })
+    .catch((err) => {
+      return Promise.reject(err)
+    })
+}
+
 export default {
+  updateReview,
   createReview,
   fetchReviews,
   fetchMyReviews,

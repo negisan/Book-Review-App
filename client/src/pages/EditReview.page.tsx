@@ -1,10 +1,11 @@
 import React from 'react'
+import { ReviewForm } from '../components'
 
 const EditReview = () => {
   return (
-    <div>
-      <h1>EditReviewPage</h1>
-    </div>
+    <>
+      <ReviewForm from={'edit_page'} />
+    </>
   )
 }
 
