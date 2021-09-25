@@ -89,3 +89,21 @@ global classes
     width: 95vw;
   }
 }
+
+.btn {
+  background: var(--clr-primary-6);
+  border: transparent;
+  border-radius: var(--radius);
+  padding: 0.5rem 1.5rem;
+  font-size: 1.25rem;
+  color: var(--clr-white);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn:hover {
+  background: var(--clr-primary-5);
+}
+.btn[disabled] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}

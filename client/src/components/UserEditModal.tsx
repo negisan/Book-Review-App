@@ -78,7 +78,11 @@ const UserEditModal = ({ closeUserEditModal }: any) => {
                     )}
                   </Field>
                   <ButtonContainer>
-                    <button type='submit' disabled={submitting || pristine}>
+                    <button
+                      type='submit'
+                      className='btn'
+                      disabled={submitting || pristine}
+                    >
                       submit
                     </button>
                   </ButtonContainer>
@@ -103,24 +107,6 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;
-  button {
-    padding: 0.5rem 1.25rem;
-    background: var(--clr-primary-6);
-    color: var(--clr-white);
-    font-size: 1.25rem;
-    text-transform: capitalize;
-    border: transparent;
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: var(--transition);
-    &:hover {
-      background: var(--clr-primary-5);
-    }
-    &[disabled] {
-      cursor: not-allowed;
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-  }
 `
 const ErrorInfo = styled.span`
   margin-left: 1.25rem;
