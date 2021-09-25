@@ -12,12 +12,10 @@ const login = async (credentials: LoginCredentials) => {
   return await axios
     .post(BASE_API_URL + 'signin', JSON.stringify(credentials))
     .then((res) => {
-      console.log('サービスのThen句', res)
       localStorage.setItem('user', JSON.stringify(res.data))
       return Promise.resolve()
     })
     .catch((err) => {
-      console.log('サービスのcatch句', err)
       return Promise.reject(err)
     })
 }

@@ -3,16 +3,16 @@ import React, { useContext, useReducer, useState } from 'react'
 import reducer from '../reducers/reviews.reducer'
 import {
   FETCH_REVIEWS_SUCCESS,
-  FETCH_REVIEWS_FAIL,
   FETCH_MYREVIEWS_SUCCESS,
+  FETCH_REVIEW_SUCCESS,
 } from '../constants/reviews.constants'
-import ReviewsService from '../services/reviews.service'
+import ReviewService from '../services/review.service'
 import { useUIContext } from './UI.context'
 
 const initialState = {
   reviews: [],
   my_reviews: [],
-  review: [],
+  review: '',
 }
 
 const ReviewsContext = React.createContext<any | null>(null)
@@ -25,7 +25,7 @@ export const ReviewsProvider = ({ children }: any) => {
 
   const fetchReviews = async () => {
     setIsLoading(true)
-    await ReviewsService.fetchReviews()
+    await ReviewService.fetchReviews()
       .then((reviews) => {
         dispatch({ type: FETCH_REVIEWS_SUCCESS, payload: reviews })
         setIsLoading(false)
@@ -42,7 +42,7 @@ export const ReviewsProvider = ({ children }: any) => {
 
   const fetchMyReviews = async () => {
     setIsLoading(true)
-    await ReviewsService.fetchMyReviews()
+    await ReviewService.fetchMyReviews()
       .then((reviews) => {
         dispatch({ type: FETCH_MYREVIEWS_SUCCESS, payload: reviews })
         setIsLoading(false)
@@ -57,9 +57,24 @@ export const ReviewsProvider = ({ children }: any) => {
       })
   }
 
+  const fetchReview = async (id: string) => {
+    setIsLoading(true)
+    await ReviewService.fetchReview(id)
+      .then((review) => {
+        dispatch({ type: FETCH_REVIEW_SUCCESS, payload: review })
+        setIsLoading(false)
+      })
+      .catch((err) => {
+        const message =
+          err.response?.data?.ErrorMessageJP || err.message || err.toString()
+        toastError(message)
+        setIsLoading(false)
+      })
+  }
+
   return (
     <ReviewsContext.Provider
-      value={{ ...state, fetchReviews, fetchMyReviews, isLoading }}
+      value={{ ...state, fetchReviews, fetchMyReviews, fetchReview, isLoading }}
     >
       {children}
     </ReviewsContext.Provider>

@@ -27,7 +27,23 @@ const fetchMyReviews = async () => {
     })
 }
 
+const fetchReview = async (id: string) => {
+  return await axios({
+    method: 'get',
+    url: BASE_API_URL + 'books/' + id,
+    headers: authHeader(),
+    data: { id: id },
+  })
+    .then((res) => {
+      return Promise.resolve(res.data)
+    })
+    .catch((err) => {
+      return Promise.reject(err)
+    })
+}
+
 export default {
   fetchReviews,
   fetchMyReviews,
+  fetchReview,
 }

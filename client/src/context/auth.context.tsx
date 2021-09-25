@@ -80,7 +80,6 @@ export const AuthProvider = ({ children }: any) => {
             setIsLoading(false)
           })
           .catch((error) => {
-            console.log('ログインユーザーフェッチのキャッチ句', error)
             const message =
               error.response?.data?.ErrorMessageJP ||
               error.message ||
@@ -90,7 +89,6 @@ export const AuthProvider = ({ children }: any) => {
           })
       })
       .catch((error) => {
-        console.log('ログインキャッチ句', error)
         const message =
           error.response?.data?.ErrorMessageJP ||
           error.message ||
