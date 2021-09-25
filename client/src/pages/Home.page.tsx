@@ -18,10 +18,6 @@ const Home: React.FC = () => {
     fetchReviews()
   }, [])
 
-  if (isLoading) {
-    return <CustomLoader />
-  }
-
   return (
     <Wrapper>
       {/* hero */}
@@ -34,7 +30,7 @@ const Home: React.FC = () => {
         <p className='hero-phrase'>Review</p>
       </HeroContainer>
       <div className='section-center'>
-        <ReviewList reviews={reviews} />
+        {isLoading ? <CustomLoader /> : <ReviewList reviews={reviews} />}
       </div>
     </Wrapper>
   )

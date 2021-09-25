@@ -25,10 +25,6 @@ const User = () => {
     fetchMyReviews()
   }, [])
 
-  if (isLoading) {
-    return <CustomLoader />
-  }
-
   return (
     <div className='section section-center'>
       <UserInfoWrapper>
@@ -42,7 +38,7 @@ const User = () => {
         )}
         <div className='horizon'></div>
       </UserInfoWrapper>
-      <ReviewList reviews={my_reviews} />
+      {isLoading ? <CustomLoader /> : <ReviewList reviews={my_reviews} />}
     </div>
   )
 }
