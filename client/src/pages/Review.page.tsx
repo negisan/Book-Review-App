@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { IoPersonCircleOutline } from 'react-icons/io5'
 import { GoLinkExternal } from 'react-icons/go'
+import { BsThreeDots } from 'react-icons/bs'
 
 import { CustomLoader } from '../components'
 
@@ -12,7 +13,18 @@ const Review = () => {
   const { fetchReview, review: items, isLoading } = useReviewsContext()
   // @ts-ignore
   const { id } = useParams()
-  const { title, url, detail, review, reviewer } = items
+  const { title, url, detail, review, reviewer, isMine } = items
+  const [isEditMenueOpen, setIsEditMenueOpen] = useState(true)
+
+  console.log(isEditMenueOpen)
+
+  const closeEditMenue = () => {
+    setIsEditMenueOpen(false)
+  }
+  const openEditMenue = (e: any) => {
+    e.stopPropagation()
+    setIsEditMenueOpen(true)
+  }
 
   useEffect(() => {
     fetchReview(id)
@@ -26,6 +38,35 @@ const Review = () => {
     <div className='section section-center'>
       <Wrapper>
         <Heading>
+          {isMine ? (
+            <EditMenue>
+              <BsThreeDots
+                size={45}
+                className='menue-icon'
+                onClick={(e) => openEditMenue(e)}
+              />
+              {isEditMenueOpen && (
+                <>
+                  <div className='overlay' onClick={closeEditMenue}></div>
+                  <EditBar>
+                    <Link to={`/review/${id}/edit`} className='item'>
+                      <p>編集する</p>
+                    </Link>
+                    <div
+                      className='item delete'
+                      onClick={() => {
+                        window.alert('削除はまだ実装されてません')
+                      }}
+                    >
+                      <p>削除する</p>
+                    </div>
+                  </EditBar>
+                </>
+              )}
+            </EditMenue>
+          ) : (
+            ''
+          )}
           <ReviewerInfo>
             <IoPersonCircleOutline size={24} />
             <p>{reviewer}</p>
@@ -61,6 +102,56 @@ const Review = () => {
     </div>
   )
 }
+
+const EditMenue = styled.div`
+  display: flex;
+  justify-content: end;
+  .menue-icon {
+    color: var(--clr-grey-4);
+    cursor: pointer;
+  }
+  position: relative;
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: transparent;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+  }
+`
+
+const EditBar = styled.div`
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--clr-white);
+  border-radius: var(--radius);
+  box-shadow: var(--light-shadow);
+  .item {
+    transition: var(--transition);
+    padding: 1rem 1.75rem;
+    :hover {
+      background: var(--clr-grey-10);
+    }
+  }
+  p {
+    display: inline;
+    font-size: 1.25rem;
+    color: var(--clr-grey-5);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .delete {
+    cursor: pointer;
+    p {
+      color: var(--clr-red);
+    }
+  }
+`
 
 const ReviewContainer = styled.div`
   justify-self: start;
