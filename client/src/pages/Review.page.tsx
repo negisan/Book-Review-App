@@ -127,7 +127,6 @@ const EditBar = styled.div`
   z-index: 10;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   background: var(--clr-white);
   border-radius: var(--radius);
   box-shadow: var(--light-shadow);
