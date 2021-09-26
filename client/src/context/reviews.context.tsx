@@ -7,6 +7,7 @@ import {
   FETCH_MYREVIEWS_SUCCESS,
   FETCH_REVIEW_SUCCESS,
   UPDATE_REVIEW_SUCCESS,
+  DELETE_REVIEW_SUCCESS,
 } from '../constants/reviews.constants'
 import ReviewService from '../services/review.service'
 import { useUIContext } from './UI.context'
@@ -116,10 +117,28 @@ export const ReviewsProvider = ({ children }: any) => {
       })
   }
 
+  const deleteReview = async (id: string) => {
+    setIsLoading(true)
+    await ReviewService.deleteReview(id)
+      .then(() => {
+        dispatch({ type: DELETE_REVIEW_SUCCESS })
+        toastSuccess('レビューを削除しました')
+        history.replace('/')
+        setIsLoading(false)
+      })
+      .catch((err) => {
+        const message =
+          err.response?.data?.ErrorMessageJP || err.message || err.toString()
+        toastError(message)
+        setIsLoading(false)
+      })
+  }
+
   return (
     <ReviewsContext.Provider
       value={{
         ...state,
+        deleteReview,
         fetchReviews,
         fetchMyReviews,
         fetchReview,

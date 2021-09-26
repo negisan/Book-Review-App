@@ -3,6 +3,7 @@ import {
   FETCH_MYREVIEWS_SUCCESS,
   FETCH_REVIEW_SUCCESS,
   UPDATE_REVIEW_SUCCESS,
+  DELETE_REVIEW_SUCCESS,
 } from '../constants/reviews.constants'
 
 // @ts-ignore
@@ -18,6 +19,9 @@ const reviews_reducer = (state, action) => {
   }
   if (action.type === UPDATE_REVIEW_SUCCESS) {
     return { ...state, review: action.payload }
+  }
+  if (action.type === DELETE_REVIEW_SUCCESS) {
+    return { ...state, review: '' }
   }
   throw new Error(`No Matching "${action.type}" - action type`)
 }

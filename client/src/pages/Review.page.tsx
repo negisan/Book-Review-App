@@ -4,19 +4,49 @@ import styled from 'styled-components'
 import { IoPersonCircleOutline } from 'react-icons/io5'
 import { GoLinkExternal } from 'react-icons/go'
 import { BsThreeDots } from 'react-icons/bs'
+import { confirmAlert } from 'react-confirm-alert'
 
 import { CustomLoader } from '../components'
 
 import { useReviewsContext } from '../context/reviews.context'
 
 const Review = () => {
-  const { fetchReview, review: items, isLoading } = useReviewsContext()
+  const {
+    fetchReview,
+    review: items,
+    isLoading,
+    deleteReview,
+  } = useReviewsContext()
   // @ts-ignore
   const { id } = useParams()
   const { title, url, detail, review, reviewer, isMine } = items
   const [isEditMenueOpen, setIsEditMenueOpen] = useState(false)
 
-  console.log(items)
+  const handleDeleteOnClick = () => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <AlertContainer>
+            <h1>本当に削除してもよろしいですか？</h1>
+            <div className='btn-container'>
+              <button
+                onClick={() => {
+                  deleteReview(id)
+                  onClose()
+                }}
+                className='btn-yes'
+              >
+                はい
+              </button>
+              <button onClick={onClose} className='btn-no'>
+                いいえ
+              </button>
+            </div>
+          </AlertContainer>
+        )
+      },
+    })
+  }
 
   const closeEditMenue = () => {
     setIsEditMenueOpen(false)
@@ -54,9 +84,7 @@ const Review = () => {
                     </Link>
                     <div
                       className='item delete'
-                      onClick={() => {
-                        window.alert('削除はまだ実装されてません')
-                      }}
+                      onClick={() => handleDeleteOnClick()}
                     >
                       <p>削除する</p>
                     </div>
@@ -102,6 +130,47 @@ const Review = () => {
     </div>
   )
 }
+
+const AlertContainer = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  min-width: 400px;
+  background: var(--clr-white);
+  box-shadow: var(--dark-shadow);
+  border-radius: var(--radius);
+  padding: 6rem 3rem 3rem 3rem;
+  display: flex;
+  gap: 6rem;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  h1 {
+    color: var(--clr-grey-3);
+  }
+  button {
+    background: transparent;
+    border: transparent;
+    border-radius: var(--radius);
+    font-size: 1.75rem;
+    padding: 0.5rem 1.5rem;
+    box-shadow: var(--light-shadow);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .btn-yes {
+    margin-right: 4rem;
+    background: var(--clr-red);
+    color: var(--clr-white);
+  }
+  .btn-no {
+    background: var(--clr-grey-6);
+    color: var(--clr-white);
+  }
+`
 
 const EditMenue = styled.div`
   display: flex;

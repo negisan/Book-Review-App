@@ -81,7 +81,25 @@ const updateReview = async (id: string, values: ReviewData) => {
     })
 }
 
+const deleteReview = async (id: string) => {
+  return await axios({
+    method: 'delete',
+    url: BASE_API_URL + 'books/' + id,
+    headers: authHeader(),
+    data: { id: id },
+  })
+    .then((err) => {
+      console.log(err)
+
+      return Promise.resolve()
+    })
+    .catch((err) => {
+      return Promise.reject(err)
+    })
+}
+
 export default {
+  deleteReview,
   updateReview,
   createReview,
   fetchReviews,
