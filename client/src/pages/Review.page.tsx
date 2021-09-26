@@ -115,7 +115,9 @@ const Review = () => {
           <div className='underline'></div>
         </Heading>
         <BookInfoContainer>
-          <img src='https://picsum.photos/200/260' alt='picsum' />
+          <div className='img-wrap'>
+            <img src='https://picsum.photos/200/260' alt='picsum' />
+          </div>
           <div>
             <Title>
               <div>
@@ -298,6 +300,11 @@ const BookInfoContainer = styled.section`
     border-radius: var(--radius);
     box-shadow: var(--light-shadow);
   }
+  .img-wrap {
+    width: 200px;
+    height: 260px;
+    background: grey;
+  }
   @media (min-width: 1024px) {
     flex-direction: row;
   }
@@ -331,7 +338,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  border: 1px solid var(--clr-grey-5);
+  border: 1px solid var(--clr-grey-3);
   border-radius: var(--radius);
   padding: 3rem;
 `

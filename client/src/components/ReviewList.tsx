@@ -19,7 +19,9 @@ const ReviewList = (props: any) => {
       <Heading>
         <h1>reviews</h1>
         <div className='underline'></div>
-        <span className='view-more'>ViewMore</span>
+        <Link to={'/allreviews'}>
+          <span className='view-more'>ViewMore</span>
+        </Link>
       </Heading>
       <ReviewListContainer>
         {reviews.map((review: ReviewData) => {
@@ -34,7 +36,9 @@ const ReviewList = (props: any) => {
                   <IoPersonCircleOutline size={20} />
                   {reviewer}
                 </span>
-                <img src={picsum} alt='picsum' />
+                <div className='img-wrap'>
+                  <img src={picsum} alt='picsum' />
+                </div>
               </ReviewContainer>
             </Link>
           )
@@ -95,6 +99,11 @@ const Heading = styled.div`
 `
 
 const ReviewContainer = styled.div`
+  .img-wrap {
+    width: 200px;
+    height: 260px;
+    background: lightgrey;
+  }
   img {
     border-radius: var(--radius);
     box-shadow: var(--dark-shadow);
