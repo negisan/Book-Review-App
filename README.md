@@ -30,7 +30,7 @@ $yarn install
 $npm start
 ```
 
-of
+or
 
 ```
 $yarn start
