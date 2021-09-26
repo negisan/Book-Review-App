@@ -6,7 +6,9 @@ import ReviewList from './ReviewList'
 import UserEditModal from './UserEditModal'
 import Footer from './Footer'
 import ReviewForm from './ReviewForm'
+import AllReviewList from './AllReviewList'
 export {
+  AllReviewList,
   ReviewForm,
   Footer,
   UserEditModal,

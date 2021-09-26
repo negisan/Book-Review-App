@@ -14,6 +14,7 @@ import {
   Signup,
   User,
   ErrorPage,
+  AllReviews,
 } from './pages'
 import {
   Sidebar,
@@ -21,6 +22,7 @@ import {
   PrivateRoute,
   CustomLoader,
   Footer,
+  AllReviewList,
 } from './components'
 
 import { useAuthContext } from './context/auth.context'
@@ -49,6 +51,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path='/' component={Home} />
+        <Route exact path='/allreviews' component={AllReviews} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
         <PrivateRoute exact path='/user/:id' component={User} />

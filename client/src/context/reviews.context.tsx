@@ -8,6 +8,8 @@ import {
   FETCH_REVIEW_SUCCESS,
   UPDATE_REVIEW_SUCCESS,
   DELETE_REVIEW_SUCCESS,
+  FETCH_MORE_REVIEWS_SUCCESS,
+  FETCH_MORE_REVIEWS_FAIL,
 } from '../constants/reviews.constants'
 import ReviewService from '../services/review.service'
 import { useUIContext } from './UI.context'
@@ -16,6 +18,8 @@ const initialState = {
   reviews: [],
   my_reviews: [],
   review: '',
+  AllReviews: [],
+  hasMoreReviews: true,
 }
 
 const ReviewsContext = React.createContext<any | null>(null)
@@ -134,10 +138,32 @@ export const ReviewsProvider = ({ children }: any) => {
       })
   }
 
+  const loadMoreReviews = async (page: string) => {
+    console.log('関数発火時のステート', state)
+
+    await ReviewService.loadMoreReviews(page)
+      .then((reviews) => {
+        console.log('データ取得', reviews)
+
+        if (reviews.length < 1) {
+          console.log('取得制限に到達')
+          dispatch({ type: FETCH_MORE_REVIEWS_FAIL })
+          return
+        }
+        dispatch({ type: FETCH_MORE_REVIEWS_SUCCESS, payload: reviews })
+      })
+      .catch((err) => {
+        const message =
+          err.response?.data?.ErrorMessageJP || err.message || err.toString()
+        toastError(message)
+      })
+  }
+
   return (
     <ReviewsContext.Provider
       value={{
         ...state,
+        loadMoreReviews,
         deleteReview,
         fetchReviews,
         fetchMyReviews,

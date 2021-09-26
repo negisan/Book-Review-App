@@ -4,6 +4,8 @@ import {
   FETCH_REVIEW_SUCCESS,
   UPDATE_REVIEW_SUCCESS,
   DELETE_REVIEW_SUCCESS,
+  FETCH_MORE_REVIEWS_SUCCESS,
+  FETCH_MORE_REVIEWS_FAIL,
 } from '../constants/reviews.constants'
 
 // @ts-ignore
@@ -22,6 +24,12 @@ const reviews_reducer = (state, action) => {
   }
   if (action.type === DELETE_REVIEW_SUCCESS) {
     return { ...state, review: '' }
+  }
+  if (action.type === FETCH_MORE_REVIEWS_SUCCESS) {
+    return { ...state, AllReviews: state.AllReviews.concat(action.payload) }
+  }
+  if (action.type === FETCH_MORE_REVIEWS_FAIL) {
+    return { ...state, hasMoreReviews: false }
   }
   throw new Error(`No Matching "${action.type}" - action type`)
 }

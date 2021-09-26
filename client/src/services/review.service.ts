@@ -88,9 +88,7 @@ const deleteReview = async (id: string) => {
     headers: authHeader(),
     data: { id: id },
   })
-    .then((err) => {
-      console.log(err)
-
+    .then(() => {
       return Promise.resolve()
     })
     .catch((err) => {
@@ -98,7 +96,22 @@ const deleteReview = async (id: string) => {
     })
 }
 
+const loadMoreReviews = async (page: string) => {
+  let offset = ((parseInt(page, 10) - 1) * 10).toString()
+  return await axios({
+    method: 'get',
+    url: BASE_API_URL + 'public/books?offset=' + offset,
+  })
+    .then((res) => {
+      return Promise.resolve(res.data)
+    })
+    .catch((err) => {
+      return Promise.reject(err)
+    })
+}
+
 export default {
+  loadMoreReviews,
   deleteReview,
   updateReview,
   createReview,
