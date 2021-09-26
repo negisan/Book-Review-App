@@ -37,6 +37,10 @@ const Review = () => {
   const handleDeleteOnClick = () => {
     confirmAlert({
       customUI: ({ onClose }) => {
+        const handleClickOnNo = () => {
+          onClose()
+          closeEditMenue()
+        }
         return (
           <AlertContainer>
             <h1>本当に削除してもよろしいですか？</h1>
@@ -50,7 +54,7 @@ const Review = () => {
               >
                 はい
               </button>
-              <button onClick={onClose} className='btn-no'>
+              <button onClick={handleClickOnNo} className='btn-no'>
                 いいえ
               </button>
             </div>
