@@ -22,6 +22,18 @@ const Review = () => {
   const { title, url, detail, review, reviewer, isMine } = items
   const [isEditMenueOpen, setIsEditMenueOpen] = useState(false)
 
+  function isValidHttpUrl(string: string) {
+    let url
+    try {
+      url = new URL(string)
+    } catch (_) {
+      return false
+    }
+    return url.protocol === 'http:' || url.protocol === 'https:'
+  }
+
+  const validURL = isValidHttpUrl(url)
+
   const handleDeleteOnClick = () => {
     confirmAlert({
       customUI: ({ onClose }) => {
@@ -108,7 +120,7 @@ const Review = () => {
             <Title>
               <div>
                 <h4>{title}</h4>
-                {url && (
+                {validURL && (
                   <a href={`${url}`} target='_blank' rel='noopener noreferrer'>
                     <GoLinkExternal size={20} />
                   </a>
@@ -254,6 +266,7 @@ const Title = styled.div`
   font-size: 1.2rem;
   h4 {
     display: inline;
+    text-transform: capitalize;
   }
   a {
     color: var(--clr-grey-3);
