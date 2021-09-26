@@ -15,6 +15,7 @@ import {
   User,
   ErrorPage,
   AllReviews,
+  AllMyReviews,
 } from './pages'
 import {
   Sidebar,
@@ -56,6 +57,11 @@ function App() {
         <Route exact path='/signup' component={Signup} />
         <PrivateRoute exact path='/user/:id' component={User} />
         <PrivateRoute exact path='/user/:id/reviews' component={Reviews} />
+        <PrivateRoute
+          exact
+          path='/user/:id/allreviews'
+          component={AllMyReviews}
+        />
         <PrivateRoute exact path='/reviews/new' component={CreateReview} />
         <PrivateRoute exact path='/review/:id' component={Review} />
         <PrivateRoute exact path='/review/:id/edit' component={EditReview} />

@@ -14,12 +14,14 @@ interface ReviewData {
 
 const ReviewList = (props: any) => {
   const reviews = props.reviews
+  const viewMoreLink = props.viewMoreLink || '#'
+
   return (
     <ReviewListWrapper>
       <Heading>
         <h1>reviews</h1>
         <div className='underline'></div>
-        <Link to={'/allreviews'}>
+        <Link to={viewMoreLink}>
           <span className='view-more'>ViewMore</span>
         </Link>
       </Heading>

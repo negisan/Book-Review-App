@@ -8,7 +8,9 @@ import Login from './Login.page'
 import Signup from './Signup.page'
 import User from './User.page'
 import AllReviews from './AllReviews.page'
+import AllMyReviews from './AllMyReviews.page'
 export {
+  AllMyReviews,
   AllReviews,
   Review,
   Reviews,

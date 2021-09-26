@@ -110,7 +110,24 @@ const loadMoreReviews = async (page: string) => {
     })
 }
 
+const loadMoreMyReviews = async (page: string) => {
+  let offset = ((parseInt(page, 10) - 1) * 10).toString()
+  return await axios({
+    method: 'get',
+    url: BASE_API_URL + '/books?offset=' + offset,
+    headers: authHeader(),
+  })
+    .then((res) => {
+      const myreviews = res.data.filter((review: any) => review.isMine === true)
+      return Promise.resolve(myreviews)
+    })
+    .catch((err) => {
+      return Promise.reject(err)
+    })
+}
+
 export default {
+  loadMoreMyReviews,
   loadMoreReviews,
   deleteReview,
   updateReview,

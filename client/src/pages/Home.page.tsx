@@ -30,7 +30,11 @@ const Home: React.FC = () => {
         <p className='hero-phrase'>Review</p>
       </HeroContainer>
       <div className='section-center'>
-        {isLoading ? <CustomLoader /> : <ReviewList reviews={reviews} />}
+        {isLoading ? (
+          <CustomLoader />
+        ) : (
+          <ReviewList reviews={reviews} viewMoreLink={'/allreviews'} />
+        )}
       </div>
     </Wrapper>
   )

@@ -38,7 +38,14 @@ const User = () => {
         )}
         <div className='horizon'></div>
       </UserInfoWrapper>
-      {isLoading ? <CustomLoader /> : <ReviewList reviews={my_reviews} />}
+      {isLoading ? (
+        <CustomLoader />
+      ) : (
+        <ReviewList
+          reviews={my_reviews}
+          viewMoreLink={`/user/${user.name}/allreviews`}
+        />
+      )}
     </div>
   )
 }
