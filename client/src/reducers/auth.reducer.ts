@@ -1,15 +1,10 @@
 import {
-  REGISTER_FAIL,
-  LOGIN_FAIL,
   FETCH_USER_SUCCESS,
-  FETCH_USER_FAIL,
   LOGOUT,
   UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAIL,
 } from '../constants/auth.constants'
 
-// @ts-ignore
-const auth_reducer = (state, action) => {
+const auth_reducer = (state: any, action: any) => {
   if (action.type === LOGOUT) {
     return {}
   }

@@ -2,7 +2,7 @@ import React from 'react'
 import { AllReviewList } from '../components'
 import { useReviewsContext } from '../context/reviews.context'
 
-const AllMyReviews = () => {
+const AllMyReviews: React.FC = () => {
   const { loadMoreMyReviews, AllMyReviews, hasMoreMyReviews } =
     useReviewsContext()
   return (

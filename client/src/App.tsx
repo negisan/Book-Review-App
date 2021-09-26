@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import {
   Review,
-  Reviews,
   CreateReview,
   EditReview,
   Home,
@@ -23,7 +22,6 @@ import {
   PrivateRoute,
   CustomLoader,
   Footer,
-  AllReviewList,
 } from './components'
 
 import { useAuthContext } from './context/auth.context'
@@ -56,7 +54,6 @@ function App() {
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
         <PrivateRoute exact path='/user/:id' component={User} />
-        <PrivateRoute exact path='/user/:id/reviews' component={Reviews} />
         <PrivateRoute
           exact
           path='/user/:id/allreviews'

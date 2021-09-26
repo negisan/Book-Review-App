@@ -10,15 +10,14 @@ import { CustomLoader } from '../components'
 
 import { useReviewsContext } from '../context/reviews.context'
 
-const Review = () => {
+const Review: React.FC = () => {
   const {
     fetchReview,
     review: items,
     isLoading,
     deleteReview,
   } = useReviewsContext()
-  // @ts-ignore
-  const { id } = useParams()
+  const { id }: any = useParams()
   const { title, url, detail, review, reviewer, isMine } = items
   const [isEditMenueOpen, setIsEditMenueOpen] = useState(false)
 

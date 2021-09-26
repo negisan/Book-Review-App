@@ -4,12 +4,19 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { IoPersonCircleOutline } from 'react-icons/io5'
 
-const AllReviewList = (props: any) => {
+interface ReviewItem {
+  id: string
+  title: string
+  detail: string
+  reviewer: string
+}
+
+const AllReviewList: React.FC<any> = (props) => {
   const { loadMore, AllReviews, hasMore, headerTitle } = props
 
   const items = (
     <ListContainer>
-      {AllReviews.map((value: any, index: string) => {
+      {AllReviews.map((value: ReviewItem, index: string) => {
         const { id, title, detail, reviewer } = value
         const randamNum = Math.floor(Math.random() * 100)
         const picsum = `https://picsum.photos/id/${randamNum}/200/260`
@@ -21,7 +28,7 @@ const AllReviewList = (props: any) => {
             </ReviewerInfo>
             <ListItemContainer>
               <Link to={`/review/${id}`}>
-                <img src={picsum} className='img' />
+                <img src={picsum} className='img' alt='picsum' />
               </Link>
               <BookInfoContainer>
                 <Title>

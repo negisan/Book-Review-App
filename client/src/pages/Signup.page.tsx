@@ -25,8 +25,7 @@ const Signup: React.FC = () => {
   }
 
   const handleValidate = (values: FormData) => {
-    // @ts-ignore
-    const errors: FormData = {}
+    const errors: any = {}
     if (!values.name) {
       errors.name = '名前を入力してください'
     }

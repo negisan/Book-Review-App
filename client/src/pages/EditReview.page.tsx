@@ -1,7 +1,7 @@
 import React from 'react'
 import { ReviewForm } from '../components'
 
-const EditReview = () => {
+const EditReview: React.FC = () => {
   return (
     <>
       <ReviewForm from={'edit_page'} />

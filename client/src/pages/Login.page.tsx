@@ -5,7 +5,6 @@ import { IoPersonCircleOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
 
 import { useAuthContext } from '../context/auth.context'
-import { useUIContext } from '../context/UI.context'
 
 interface FormData {
   email: string
@@ -20,8 +19,7 @@ const Login: React.FC = () => {
   }
 
   const handleValidate = (values: FormData) => {
-    // @ts-ignore
-    const errors: FormData = {}
+    const errors: any = {}
     if (!values.email) {
       errors.email = 'メールアドレスを入力してください'
     }

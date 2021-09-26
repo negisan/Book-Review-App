@@ -14,12 +14,11 @@ interface FormData {
   review: string
 }
 
-const ReviewForm = (props?: any) => {
+const ReviewForm: React.FC<any> = (props) => {
   const from = props.from
   const { fetchReview, createReview, updateTeview, review, isLoading } =
     useReviewsContext()
-  // @ts-ignore
-  const { id } = useParams()
+  const { id }: any = useParams()
 
   const onSubmit = async (values: FormData) => {
     if (from === 'edit_page') {
@@ -31,8 +30,7 @@ const ReviewForm = (props?: any) => {
   }
 
   const handleValidate = (values: FormData) => {
-    // @ts-ignore
-    const errors: FormData = {}
+    const errors: any = {}
     if (!values.title) {
       errors.title = 'required'
     }

@@ -1,5 +1,4 @@
 import Review from './Review.page'
-import Reviews from './Reviews.page'
 import CreateReview from './CreateReview.page'
 import EditReview from './EditReview.page'
 import ErrorPage from './Error.page'
@@ -13,7 +12,6 @@ export {
   AllMyReviews,
   AllReviews,
   Review,
-  Reviews,
   CreateReview,
   EditReview,
   ErrorPage,

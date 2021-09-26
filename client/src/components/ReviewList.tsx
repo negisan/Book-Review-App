@@ -12,7 +12,7 @@ interface ReviewData {
   reviewer: string
 }
 
-const ReviewList = (props: any) => {
+const ReviewList: React.FC<any> = (props) => {
   const reviews = props.reviews
   const viewMoreLink = props.viewMoreLink || '#'
 

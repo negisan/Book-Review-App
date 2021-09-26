@@ -8,7 +8,7 @@ import { CustomLoader, ReviewList, UserEditModal } from '../components'
 import { useAuthContext } from '../context/auth.context'
 import { useReviewsContext } from '../context/reviews.context'
 
-const User = () => {
+const User: React.FC = () => {
   const { user } = useAuthContext()
   const { my_reviews, fetchMyReviews, isLoading } = useReviewsContext()
   const [showUserEditModal, setShowUserEditModal] = useState(false)

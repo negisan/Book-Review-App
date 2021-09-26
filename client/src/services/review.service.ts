@@ -5,7 +5,7 @@ const BASE_API_URL = 'https://api-for-missions-and-railways.herokuapp.com/'
 
 const fetchReviews = async () => {
   return await axios
-    .get(`${BASE_API_URL}/public/books?offset=20`)
+    .get(`${BASE_API_URL}/public/books`)
     .then((res) => {
       return Promise.resolve(res.data)
     })

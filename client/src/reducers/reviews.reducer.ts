@@ -10,8 +10,7 @@ import {
   FETCH_MORE_MYREVIEWS_FAIL,
 } from '../constants/reviews.constants'
 
-// @ts-ignore
-const reviews_reducer = (state, action) => {
+const reviews_reducer = (state: any, action: any) => {
   if (action.type === FETCH_REVIEWS_SUCCESS) {
     return { ...state, reviews: action.payload }
   }

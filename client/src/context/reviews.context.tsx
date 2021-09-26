@@ -29,7 +29,6 @@ const initialState = {
 const ReviewsContext = React.createContext<any | null>(null)
 
 export const ReviewsProvider = ({ children }: any) => {
-  // @ts-ignore
   const [state, dispatch] = useReducer(reducer, initialState)
   const [isLoading, setIsLoading] = useState(false)
   const { toastError, toastSuccess } = useUIContext()

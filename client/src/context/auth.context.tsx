@@ -4,13 +4,9 @@ import { useHistory } from 'react-router'
 import AuthService from '../services/auth.service'
 import reducer from '../reducers/auth.reducer'
 import {
-  REGISTER_FAIL,
-  LOGIN_FAIL,
   LOGOUT,
   FETCH_USER_SUCCESS,
-  FETCH_USER_FAIL,
   UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAIL,
 } from '../constants/auth.constants'
 import { useUIContext } from './UI.context'
 
@@ -21,7 +17,6 @@ const initialState = {
 const AuthContext = React.createContext<any | null>(null)
 
 export const AuthProvider = ({ children }: any) => {
-  // @ts-ignore
   const [state, dispatch] = useReducer(reducer, initialState)
   const [isLoading, setIsLoading] = useState(false)
   const { toastSuccess, toastError } = useUIContext()

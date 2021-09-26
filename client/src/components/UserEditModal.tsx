@@ -5,7 +5,7 @@ import { FaTimes } from 'react-icons/fa'
 
 import { useAuthContext } from '../context/auth.context'
 
-const UserEditModal = ({ closeUserEditModal }: any) => {
+const UserEditModal: React.FC<any> = ({ closeUserEditModal }) => {
   const { user, updateUser } = useAuthContext()
 
   const disableScroll = (event: any) => {

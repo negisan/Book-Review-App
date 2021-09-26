@@ -1,7 +1,7 @@
 import React from 'react'
 import PuffLoader from 'react-spinners/PuffLoader'
 
-const CustomLoader = () => {
+const CustomLoader: React.FC = () => {
   return (
     <div
       style={{
