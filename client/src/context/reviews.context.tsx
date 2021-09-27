@@ -164,8 +164,6 @@ export const ReviewsProvider = ({ children }: any) => {
           dispatch({ type: FETCH_MORE_MYREVIEWS_FAIL })
           return
         }
-        console.log('マイコンテクスト', reviews)
-
         dispatch({ type: FETCH_MORE_MYREVIEWS_SUCCESS, payload: reviews })
       })
       .catch((err) => {
