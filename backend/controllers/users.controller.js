@@ -3,11 +3,12 @@ const router = express.Router()
 const Joi = require('joi')
 const userService = require('services/user.service')
 const authorize = require('_middleware/authorize')
+const validateRequest = require('../_middleware/validate-request')
 
 // route
-router.post('/', create)
+router.post('/', createSchema, create)
 router.get('/', authorize(), show)
-router.put('/', authorize(), update)
+router.put('/', authorize(), updateSchema, update)
 
 module.exports = router
 
@@ -32,4 +33,22 @@ function update(req, res, next) {
       res.json(user.name)
     })
     .catch(next)
+}
+
+// validate
+
+function createSchema(req, res, next) {
+  const schema = Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+  })
+  validateRequest(req, next, schema)
+}
+
+function updateSchema(req, res, next) {
+  const schema = Joi.object({
+    name: Joi.string().empty(''),
+  })
+  validateRequest(req, next, schema)
 }
