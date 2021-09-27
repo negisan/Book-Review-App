@@ -9,9 +9,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.get('/', (req, res) => {
-  res.send('Hello World')
-})
+app.use('/users', require('./controllers/users.controller'))
+app.use('/', require('./controllers/auth.controller'))
 
 app.use(errorHandler)
 
