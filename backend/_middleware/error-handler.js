@@ -12,7 +12,7 @@ function errorHandler(err, req, res, next) {
           ErrorMessageEN: 'Error occured at server',
         })
       } else {
-        res.status(statusCode).json({
+        return res.status(statusCode).json({
           ErrorMessageJP: 'バリデーションエラー',
           ErrorMessageEN: 'validation error',
         })
