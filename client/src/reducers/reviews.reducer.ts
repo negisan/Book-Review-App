@@ -21,10 +21,15 @@ const reviews_reducer = (state: any, action: any) => {
     return { ...state, review: action.payload }
   }
   if (action.type === UPDATE_REVIEW_SUCCESS) {
-    return { ...state, review: action.payload }
+    return {
+      ...state,
+      review: action.payload,
+      AllReviews: [],
+      AllMyReviews: [],
+    }
   }
   if (action.type === DELETE_REVIEW_SUCCESS) {
-    return { ...state, review: '' }
+    return { ...state, review: '', AllReviews: [], AllMyReviews: [] }
   }
   if (action.type === FETCH_MORE_REVIEWS_SUCCESS) {
     return { ...state, AllReviews: state.AllReviews.concat(action.payload) }
