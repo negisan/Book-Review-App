@@ -54,7 +54,7 @@ const createReview = async (values: ReviewData) => {
     method: 'post',
     url: BASE_API_URL + '/books',
     headers: authHeader(),
-    data: JSON.stringify(values),
+    data: values,
   })
     .then((res) => {
       console.log(res)
@@ -71,7 +71,7 @@ const updateReview = async (id: string, values: ReviewData) => {
     method: 'put',
     url: BASE_API_URL + '/books/' + id,
     headers: authHeader(),
-    data: JSON.stringify(Object.assign({}, { id: id }, values)),
+    data: Object.assign({}, { id: id }, values),
   })
     .then((res) => {
       return Promise.resolve(res.data)

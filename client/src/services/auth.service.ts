@@ -11,7 +11,7 @@ const login = async (credentials: LoginCredentials) => {
   return await axios({
     method: 'post',
     url: BASE_API_URL + '/signin',
-    data: JSON.stringify(credentials),
+    data: credentials,
   })
     .then((res) => {
       localStorage.setItem('user', JSON.stringify(res.data))
@@ -32,7 +32,7 @@ const register = async (credentials: RegisterCredentials) => {
   return await axios({
     method: 'post',
     url: BASE_API_URL + '/users',
-    data: JSON.stringify(credentials),
+    data: credentials,
   })
     .then((res) => {
       localStorage.setItem('user', JSON.stringify(res.data))
@@ -67,7 +67,7 @@ const updateUser = async (credentials: UserCredentials) => {
     method: 'put',
     url: BASE_API_URL + '/users',
     headers: authHeader(),
-    data: JSON.stringify(credentials),
+    data: credentials,
   })
     .then((res) => {
       return Promise.resolve(res.data)
