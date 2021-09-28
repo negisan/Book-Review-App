@@ -11,6 +11,7 @@ app.use(cors())
 
 app.use('/public', require('./controllers/public.controller'))
 app.use('/users', require('./controllers/users.controller'))
+app.use('/books', require('./controllers/books.controller'))
 app.use('/', require('./controllers/auth.controller'))
 
 app.use(errorHandler)
