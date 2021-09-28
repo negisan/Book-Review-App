@@ -4,7 +4,7 @@
 
 <br/>
 
-### Project setup
+## Project setup
 
 ### 上の API を利用する場合
 
@@ -89,3 +89,5 @@ $ cd /client
 ```
 $ yarn start
 ```
+
+<br/>
