@@ -43,7 +43,7 @@ $ yarn install
 
 backend/config/config.json の username と password が MySql のユーザー名、パスワードと一致するように設定してください
 
-以下は ubuntu の cli での一例です。
+動作確認(以下は ubuntu の cli での一例です。)
 
 ```
 // インストールされているか確認
