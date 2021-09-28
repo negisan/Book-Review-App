@@ -13,10 +13,11 @@ interface ReviewItem {
 
 const AllReviewList: React.FC<any> = (props) => {
   const { loadMore, AllReviews, hasMore, headerTitle } = props
+  console.log(AllReviews)
 
   const items = (
     <ListContainer>
-      {AllReviews.map((value: ReviewItem, index: string) => {
+      {AllReviews?.map((value: ReviewItem, index: string) => {
         const { id, title, detail, reviewer } = value
         const randamNum = Math.floor(Math.random() * 100)
         const picsum = `https://picsum.photos/id/${randamNum}/200/260`
@@ -35,7 +36,7 @@ const AllReviewList: React.FC<any> = (props) => {
                   <h3>{title}</h3>
                   <div className='underline'></div>
                 </Title>
-                <p className='detail'>{detail.substring(0, 80)}...</p>
+                <p className='detail'>{detail?.substring(0, 80)}...</p>
               </BookInfoContainer>
             </ListItemContainer>
           </ListItemWrapper>
