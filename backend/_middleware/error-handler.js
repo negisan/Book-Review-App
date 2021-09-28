@@ -13,9 +13,7 @@ function errorHandler(err, req, res, next) {
         })
       } else {
         return res.status(statusCode).json({
-          ErrorMessageJP: 'バリデーションエラー',
-          ErrorMessageEN: 'validation error',
-          message: err,
+          ErrorMessageEN: err,
         })
       }
     case err.name === 'UnauthorizedError':
