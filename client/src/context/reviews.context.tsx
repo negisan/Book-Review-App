@@ -44,6 +44,7 @@ export const ReviewsProvider = ({ children }: any) => {
       .catch((error) => {
         const message =
           error.response?.data?.ErrorMessageJP ||
+          error.response?.data?.ErrorMessageEN ||
           error.message ||
           error.toString()
         toastError(message)
@@ -61,6 +62,7 @@ export const ReviewsProvider = ({ children }: any) => {
       .catch((error) => {
         const message =
           error.response?.data?.ErrorMessageJP ||
+          error.response?.data?.ErrorMessageEN ||
           error.message ||
           error.toString()
         toastError(message)
@@ -77,7 +79,10 @@ export const ReviewsProvider = ({ children }: any) => {
       })
       .catch((err) => {
         const message =
-          err.response?.data?.ErrorMessageJP || err.message || err.toString()
+          err.response?.data?.ErrorMessageJP ||
+          err.response?.data?.ErrorMessageEN ||
+          err.message ||
+          err.toString()
         toastError(message)
         setIsLoading(false)
       })
@@ -100,7 +105,10 @@ export const ReviewsProvider = ({ children }: any) => {
       })
       .catch((err) => {
         const message =
-          err.response?.data?.ErrorMessageJP || err.message || err.toString()
+          err.response?.data?.ErrorMessageJP ||
+          err.response?.data?.ErrorMessageEN ||
+          err.message ||
+          err.toString()
         toastError(message)
         setIsLoading(false)
       })
@@ -118,7 +126,10 @@ export const ReviewsProvider = ({ children }: any) => {
       })
       .catch((err) => {
         const message =
-          err.response?.data?.ErrorMessageJP || err.message || err.toString()
+          err.response?.data?.ErrorMessageJP ||
+          err.response?.data?.ErrorMessageEN ||
+          err.message ||
+          err.toString()
         toastError(message)
         setIsLoading(false)
       })
@@ -135,7 +146,10 @@ export const ReviewsProvider = ({ children }: any) => {
       })
       .catch((err) => {
         const message =
-          err.response?.data?.ErrorMessageJP || err.message || err.toString()
+          err.response?.data?.ErrorMessageJP ||
+          err.response?.data?.ErrorMessageEN ||
+          err.message ||
+          err.toString()
         toastError(message)
         setIsLoading(false)
       })
@@ -152,7 +166,10 @@ export const ReviewsProvider = ({ children }: any) => {
       })
       .catch((err) => {
         const message =
-          err.response?.data?.ErrorMessageJP || err.message || err.toString()
+          err.response?.data?.ErrorMessageJP ||
+          err.response?.data?.ErrorMessageEN ||
+          err.message ||
+          err.toString()
         toastError(message)
       })
   }
@@ -168,7 +185,10 @@ export const ReviewsProvider = ({ children }: any) => {
       })
       .catch((err) => {
         const message =
-          err.response?.data?.ErrorMessageJP || err.message || err.toString()
+          err.response?.data?.ErrorMessageJP ||
+          err.response?.data?.ErrorMessageEN ||
+          err.message ||
+          err.toString()
         toastError(message)
       })
   }

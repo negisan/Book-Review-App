@@ -42,6 +42,7 @@ export const AuthProvider = ({ children }: any) => {
           .catch((error) => {
             const message =
               error.response?.data?.ErrorMessageJP ||
+              error.response?.data?.ErrorMessageEN ||
               error.message ||
               error.toString()
             toastError(message)
@@ -51,6 +52,7 @@ export const AuthProvider = ({ children }: any) => {
       .catch((error) => {
         const message =
           error.response?.data?.ErrorMessageJP ||
+          error.response?.data?.ErrorMessageEN ||
           error.message ||
           error.toString()
         toastError(message)
@@ -77,6 +79,7 @@ export const AuthProvider = ({ children }: any) => {
           .catch((error) => {
             const message =
               error.response?.data?.ErrorMessageJP ||
+              error.response?.data?.ErrorMessageEN ||
               error.message ||
               error.toString()
             toastError(message)
@@ -86,6 +89,7 @@ export const AuthProvider = ({ children }: any) => {
       .catch((error) => {
         const message =
           error.response?.data?.ErrorMessageJP ||
+          error.response?.data?.ErrorMessageEN ||
           error.message ||
           error.toString()
         toastError(message)
@@ -115,6 +119,7 @@ export const AuthProvider = ({ children }: any) => {
       .catch((error) => {
         const message =
           error.response?.data?.ErrorMessageJP ||
+          error.response?.data?.ErrorMessageEN ||
           error.message ||
           error.toString()
         toastError(message)
@@ -134,6 +139,7 @@ export const AuthProvider = ({ children }: any) => {
         (error) => {
           const message =
             error.response?.data?.ErrorMessageJP ||
+            error.response?.data?.ErrorMessageEN ||
             error.message ||
             error.toString()
           toastError(message)
