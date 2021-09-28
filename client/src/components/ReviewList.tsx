@@ -26,12 +26,12 @@ const ReviewList: React.FC<any> = (props) => {
         </Link>
       </Heading>
       <ReviewListContainer>
-        {reviews.map((review: ReviewData) => {
+        {reviews.map((review: ReviewData, index: string) => {
           const { id, title, reviewer } = review
           const randamNum = Math.floor(Math.random() * 100)
           const picsum = `https://picsum.photos/id/${randamNum}/200/260`
           return (
-            <Link to={`/review/${id}`} key={id}>
+            <Link to={`/review/${id}`} key={index}>
               <ReviewContainer>
                 <h4 className='book-title'>{title}</h4>
                 <span className='reviewer'>
