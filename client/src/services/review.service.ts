@@ -14,10 +14,11 @@ const fetchReviews = async () => {
 }
 
 const fetchMyReviews = async () => {
-  return await axios
-    .get(`${BASE_API_URL}/books`, {
-      headers: authHeader(),
-    })
+  return await axios({
+    method: 'get',
+    url: BASE_API_URL + '/books',
+    headers: authHeader(),
+  })
     .then((res) => {
       return Promise.resolve(res.data)
     })

@@ -8,8 +8,11 @@ interface LoginCredentials {
 }
 
 const login = async (credentials: LoginCredentials) => {
-  return await axios
-    .post(BASE_API_URL + '/signin', JSON.stringify(credentials))
+  return await axios({
+    method: 'post',
+    url: BASE_API_URL + '/signin',
+    data: JSON.stringify(credentials),
+  })
     .then((res) => {
       localStorage.setItem('user', JSON.stringify(res.data))
       return Promise.resolve()
@@ -26,8 +29,11 @@ interface RegisterCredentials {
 }
 
 const register = async (credentials: RegisterCredentials) => {
-  return await axios
-    .post(BASE_API_URL + '/users', JSON.stringify(credentials))
+  return await axios({
+    method: 'post',
+    url: BASE_API_URL + '/users',
+    data: JSON.stringify(credentials),
+  })
     .then((res) => {
       localStorage.setItem('user', JSON.stringify(res.data))
       return res.data
@@ -39,7 +45,9 @@ const register = async (credentials: RegisterCredentials) => {
 
 const fetchUser = async () => {
   try {
-    const res = await axios.get(BASE_API_URL + '/users', {
+    const res = await axios({
+      method: 'get',
+      url: BASE_API_URL + '/users',
       headers: authHeader(),
     })
     if (res.data) {
