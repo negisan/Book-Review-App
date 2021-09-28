@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
 
+app.use('/public', require('./controllers/public.controller'))
 app.use('/users', require('./controllers/users.controller'))
 app.use('/', require('./controllers/auth.controller'))
 
