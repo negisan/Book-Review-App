@@ -1,7 +1,6 @@
 import axios from 'axios'
 import authHeader from './auth-header'
-
-const BASE_API_URL = 'https://api-for-missions-and-railways.herokuapp.com/'
+import { BASE_API_URL } from '../helpers/constant'
 
 interface LoginCredentials {
   email: string
@@ -10,7 +9,7 @@ interface LoginCredentials {
 
 const login = async (credentials: LoginCredentials) => {
   return await axios
-    .post(BASE_API_URL + 'signin', JSON.stringify(credentials))
+    .post(BASE_API_URL + '/signin', JSON.stringify(credentials))
     .then((res) => {
       localStorage.setItem('user', JSON.stringify(res.data))
       return Promise.resolve()
@@ -28,7 +27,7 @@ interface RegisterCredentials {
 
 const register = async (credentials: RegisterCredentials) => {
   return await axios
-    .post(BASE_API_URL + 'users', JSON.stringify(credentials))
+    .post(BASE_API_URL + '/users', JSON.stringify(credentials))
     .then((res) => {
       localStorage.setItem('user', JSON.stringify(res.data))
       return res.data
@@ -40,7 +39,7 @@ const register = async (credentials: RegisterCredentials) => {
 
 const fetchUser = async () => {
   try {
-    const res = await axios.get(BASE_API_URL + 'users', {
+    const res = await axios.get(BASE_API_URL + '/users', {
       headers: authHeader(),
     })
     if (res.data) {
@@ -58,7 +57,7 @@ interface UserCredentials {
 const updateUser = async (credentials: UserCredentials) => {
   return await axios({
     method: 'put',
-    url: BASE_API_URL + 'users',
+    url: BASE_API_URL + '/users',
     headers: authHeader(),
     data: JSON.stringify(credentials),
   })

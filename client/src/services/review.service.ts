@@ -1,7 +1,6 @@
 import axios from 'axios'
 import authHeader from './auth-header'
-
-const BASE_API_URL = 'https://api-for-missions-and-railways.herokuapp.com/'
+import { BASE_API_URL } from '../helpers/constant'
 
 const fetchReviews = async () => {
   return await axios
@@ -30,7 +29,7 @@ const fetchMyReviews = async () => {
 const fetchReview = async (id: string) => {
   return await axios({
     method: 'get',
-    url: BASE_API_URL + 'books/' + id,
+    url: BASE_API_URL + '/books/' + id,
     headers: authHeader(),
     data: { id: id },
   })
@@ -52,7 +51,7 @@ interface ReviewData {
 const createReview = async (values: ReviewData) => {
   return await axios({
     method: 'post',
-    url: BASE_API_URL + 'books',
+    url: BASE_API_URL + '/books',
     headers: authHeader(),
     data: JSON.stringify(values),
   })
@@ -69,7 +68,7 @@ const createReview = async (values: ReviewData) => {
 const updateReview = async (id: string, values: ReviewData) => {
   return await axios({
     method: 'put',
-    url: BASE_API_URL + 'books/' + id,
+    url: BASE_API_URL + '/books/' + id,
     headers: authHeader(),
     data: JSON.stringify(Object.assign({}, { id: id }, values)),
   })
@@ -84,7 +83,7 @@ const updateReview = async (id: string, values: ReviewData) => {
 const deleteReview = async (id: string) => {
   return await axios({
     method: 'delete',
-    url: BASE_API_URL + 'books/' + id,
+    url: BASE_API_URL + '/books/' + id,
     headers: authHeader(),
     data: { id: id },
   })
@@ -100,7 +99,7 @@ const loadMoreReviews = async (page: string) => {
   let offset = ((parseInt(page, 10) - 1) * 10).toString()
   return await axios({
     method: 'get',
-    url: BASE_API_URL + 'public/books?offset=' + offset,
+    url: BASE_API_URL + '/public/books?offset=' + offset,
   })
     .then((res) => {
       return Promise.resolve(res.data)
