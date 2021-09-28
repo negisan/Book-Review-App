@@ -9,7 +9,7 @@ function validateRequest(req, next, schema) {
   const { error, value } = schema.validate(req.body, options)
   console.log('JOIValidation==========', error)
   if (error) {
-    next(`Validate error: ${error.datails.map((x) => x.message).join(', ')}`)
+    next(`Validate error: ${error.details.map((x) => x.message).join(', ')}`)
   } else {
     req.body = value
     next()
