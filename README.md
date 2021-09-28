@@ -84,6 +84,14 @@ $ yarn run start
 $ cd /client
 ```
 
+<br/>
+
+BASE_API_URL の変更
+
+/client/src/helper/contrant.js の BASE_API_URL を http://localhost:4000 に切り替え
+
+<br/>
+
 アプリケーションの起動
 
 ```
