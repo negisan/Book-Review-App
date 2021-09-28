@@ -1,7 +1,6 @@
 const config = require('config/config.json')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const { v4: uuidv4 } = require('uuid')
 const db = require('models')
 
 module.exports = {
@@ -59,7 +58,7 @@ async function update(id, params) {
   }
 
   Object.assign(user, params)
-  await user.save
+  await user.save()
 
   return omitHash(user.get())
 }
