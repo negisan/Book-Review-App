@@ -30,7 +30,7 @@ function update(req, res, next) {
   userService
     .update(req.user.id, req.body)
     .then((user) => {
-      res.json(user.name)
+      res.json({ name: user.name })
     })
     .catch(next)
 }
