@@ -60,6 +60,8 @@ $ mysql -u root
 
 ```
 // dbの作成
+
+$ npx sequelize db:drop
 $ npx sequelize db:create
 
 // Migrationの実行
